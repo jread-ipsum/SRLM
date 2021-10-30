@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SRLM.Models.TrackModels
+{
+    public class TrackListItem
+    {
+        public int TrackId { get; set; }
+        public string Name { get; set; }
+        public string Country { get; set; }   
+    }
+}
