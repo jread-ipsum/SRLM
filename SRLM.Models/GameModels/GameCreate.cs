@@ -12,13 +12,12 @@ namespace SRLM.Models.GameModels
     {
         public string Title { get; set; }
 
-        [Display(Name ="Cars")]
         public List<int> CarIds { get; set; }
-
-        [Display(Name ="Tracks")]
         public List<int> TrackIds { get; set; }
-
-        [Display(Name ="Platforms")]
         public List<int> PlatformIds { get; set; }
+        public IEnumerable<SelectListItem> Cars { get; set; }
+        public IEnumerable<SelectListItem> Tracks { get; set; }
+        public IEnumerable<SelectListItem> Platforms { get; set; }
+
     }
 }
