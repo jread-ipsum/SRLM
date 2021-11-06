@@ -22,6 +22,7 @@ namespace SRLM.Web.Controllers
         }
 
         //GET: Game/Create
+        [Authorize(Roles ="Admin")]
         public ActionResult Create()
         {
             var svc = CreateGameService();
@@ -37,6 +38,7 @@ namespace SRLM.Web.Controllers
         //POST: Game/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create(GameCreate model)
         {
             if (!ModelState.IsValid)
@@ -69,6 +71,7 @@ namespace SRLM.Web.Controllers
         }
 
         //GET: Game/Edit/{id}
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             var svc = CreateGameService();
@@ -88,6 +91,7 @@ namespace SRLM.Web.Controllers
         //POST: Game/Edit/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id, GameEdit model)
         {
             if (!ModelState.IsValid)
@@ -112,6 +116,7 @@ namespace SRLM.Web.Controllers
         }
 
         //GET: Game/Delete/{id}
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             var svc = CreateGameService();
@@ -124,6 +129,7 @@ namespace SRLM.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Delete")]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteGame(int id)
         {
             var svc = CreateGameService();

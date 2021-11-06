@@ -22,14 +22,16 @@ namespace SRLM.Web.Controllers
         }
 
         //GET: RaceClass/Create
+        [Authorize(Roles ="Admin")]
         public ActionResult Create()
         {
             return View();
         }
-
+        
         //POST: RaceClass/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create(RaceClassCreate model)
         {
             if (!ModelState.IsValid)
@@ -46,7 +48,7 @@ namespace SRLM.Web.Controllers
             ModelState.AddModelError("", "Race Class could not be created.");
             return View(model);
         }
-
+       
         //GET: RaceClass/Detail/{id}
         public ActionResult Details(int id)
         {
@@ -55,8 +57,9 @@ namespace SRLM.Web.Controllers
 
             return View(model);
         }
-
+        
         //GET: RaceClass/Edit/{id}
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             var svc = CreateRaceClassService();
@@ -70,10 +73,11 @@ namespace SRLM.Web.Controllers
                 };
             return View(model);
         }
-
+        
         //POST: RaceClass/Edit/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id, RaceClassEdit model)
         {
             if (!ModelState.IsValid)
@@ -96,8 +100,9 @@ namespace SRLM.Web.Controllers
             ModelState.AddModelError("", "Race Class could not be updated.");
             return View(model);
         }
-
+        
         //GET: RaceClass/Delete/{id}
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             var svc = CreateRaceClassService();
@@ -105,11 +110,12 @@ namespace SRLM.Web.Controllers
 
             return View(model);
         }
-
+        
         //POST: RaceClass/Delete/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Delete")]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteRaceClass(int id)
         {
             var svc = CreateRaceClassService();
@@ -120,7 +126,7 @@ namespace SRLM.Web.Controllers
 
             return RedirectToAction("Index");
         }
-
+        
         private RaceClassService CreateRaceClassService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());

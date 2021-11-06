@@ -86,6 +86,10 @@
     <Compile Include="GameModels\GameDetail.cs" />
     <Compile Include="GameModels\GameEdit.cs" />
     <Compile Include="GameModels\GameListItem.cs" />
+    <Compile Include="LeagueModels\LeagueCreate.cs" />
+    <Compile Include="LeagueModels\LeagueDetail.cs" />
+    <Compile Include="LeagueModels\LeagueEdit.cs" />
+    <Compile Include="LeagueModels\LeagueListItem.cs" />
     <Compile Include="PlatformModels\PlatformCreate.cs" />
     <Compile Include="PlatformModels\PlatformDetail.cs" />
     <Compile Include="PlatformModels\PlatformEdit.cs" />
@@ -100,9 +104,7 @@
     <Compile Include="TrackModels\TrackEdit.cs" />
     <Compile Include="TrackModels\TrackListItem.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="LeagueModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

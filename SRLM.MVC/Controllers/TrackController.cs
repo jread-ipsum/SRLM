@@ -12,6 +12,7 @@ namespace SRLM.Web.Controllers
     [Authorize]
     public class TrackController : Controller
     {
+        
         // GET: Track
         public ActionResult Index()
         {
@@ -20,16 +21,18 @@ namespace SRLM.Web.Controllers
 
             return View(model);
         }
-
+        
         //GET: Track/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
         }
-
+       
         //POST: Track/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create(TrackCreate model)
         {
             if (!ModelState.IsValid)
@@ -46,7 +49,7 @@ namespace SRLM.Web.Controllers
             ModelState.AddModelError("", "Track could not be created.");
             return View(model);
         }
-
+        
         //GET: Track/Detail/{id}
         public ActionResult Details(int id)
         {
@@ -55,8 +58,9 @@ namespace SRLM.Web.Controllers
 
             return View(model);
         }
-
+        
         //GET: Track/Edit/{id}
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             var svc = CreateTrackService();
@@ -72,10 +76,11 @@ namespace SRLM.Web.Controllers
 
             return View(model);
         }
-
+       
         //POST: Track/Edit/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id, TrackEdit model)
         {
             if (!ModelState.IsValid)
@@ -98,8 +103,9 @@ namespace SRLM.Web.Controllers
             ModelState.AddModelError("", "Track could not be updated.");
             return View(model);
         }
-
+        
         //GET: Track/Delete/{id}
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             var svc = CreateTrackService();
@@ -107,11 +113,12 @@ namespace SRLM.Web.Controllers
 
             return View(model);
         }
-
+       
         //POST: Track/Delete/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Delete")]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteTrack(int id)
         {
             var svc = CreateTrackService();
@@ -122,7 +129,7 @@ namespace SRLM.Web.Controllers
 
             return RedirectToAction("Index");
         }
-
+        
         private TrackService CreateTrackService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());

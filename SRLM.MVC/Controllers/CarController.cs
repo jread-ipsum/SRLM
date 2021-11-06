@@ -22,6 +22,7 @@ namespace SRLM.Web.Controllers
         }
 
         //GET: Car/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             var svc = CreateCarService();
@@ -35,6 +36,7 @@ namespace SRLM.Web.Controllers
         //POST: Car/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create(CarCreate model)
         {
             if (!ModelState.IsValid)
@@ -63,6 +65,7 @@ namespace SRLM.Web.Controllers
         }
 
         //GET: Car/Edit/{id}
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             var svc = CreateCarService();
@@ -83,6 +86,7 @@ namespace SRLM.Web.Controllers
         //POST: Car/Edit/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id, CarEdit model)
         {
             if (!ModelState.IsValid)
@@ -109,6 +113,7 @@ namespace SRLM.Web.Controllers
         }
 
         //GET: Car/Delete/{id}
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             var svc = CreateCarService();
@@ -121,6 +126,7 @@ namespace SRLM.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Delete")]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteCar(int id)
         {
             var svc = CreateCarService();
