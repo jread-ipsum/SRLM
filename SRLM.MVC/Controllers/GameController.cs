@@ -51,7 +51,86 @@ namespace SRLM.Web.Controllers
             }
 
             ModelState.AddModelError("", "Game could not be created");
+
+            model.Cars = svc.GetCarsSelectList();
+            model.Tracks = svc.GetTracksSelectList();
+            model.Platforms = svc.GetPlatformsSelectList();
+
             return View(model);
+        }
+
+        //GET: Game/Details/{id}
+        public ActionResult Details(int id)
+        {
+            var svc = CreateGameService();
+            var model = svc.GetGameById(id);
+
+            return View(model);
+        }
+
+        //GET: Game/Edit/{id}
+        public ActionResult Edit(int id)
+        {
+            var svc = CreateGameService();
+            var detail = svc.GetGameById(id);
+            var model =
+                new GameEdit
+                {
+                    GameId = detail.GameId,
+                    Title = detail.Title,
+                    Cars = svc.GetCarsSelectList(),
+                    Tracks = svc.GetTracksSelectList(),
+                    Platforms = svc.GetPlatformsSelectList()
+                };
+            return View(model);
+        }
+
+        //POST: Game/Edit/{id}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, GameEdit model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            if(model.GameId != id)
+            {
+                ModelState.AddModelError("", "Id Mismatch");
+            }
+
+            var svc = CreateGameService();
+
+            if (svc.UpdateGame(model))
+            {
+                TempData["SaveResult"] = "Game was updated.";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Game could not be updated.");
+            
+            return View(model);
+        }
+
+        //GET: Game/Delete/{id}
+        public ActionResult Delete(int id)
+        {
+            var svc = CreateGameService();
+            var model = svc.GetGameById(id);
+
+            return View(model);
+        }
+
+        //POST: Game/Delete/{id}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("Delete")]
+        public ActionResult DeleteGame(int id)
+        {
+            var svc = CreateGameService();
+            svc.DeleteGame(id);
+
+            TempData["SaveResult"] = "Game was deleted.";
+            return RedirectToAction("Index");
         }
 
         private GameService CreateGameService()

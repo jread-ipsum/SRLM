@@ -49,6 +49,7 @@ namespace SRLM.Web.Controllers
             }
 
             ModelState.AddModelError("", "Car could not be created.");
+            model.RaceClasses = svc.RaceClassListItems();
             return View(model);
         }
 
@@ -102,6 +103,8 @@ namespace SRLM.Web.Controllers
             }
 
             ModelState.AddModelError("", "Car could not be updated.");
+            model.RaceClasses = svc.RaceClassListItems();
+
             return View(model);
         }
 
@@ -121,11 +124,9 @@ namespace SRLM.Web.Controllers
         public ActionResult DeleteCar(int id)
         {
             var svc = CreateCarService();
-
             svc.DeleteCar(id);
 
-            TempData["SaveResult"] = "Track was deleted.";
-
+            TempData["SaveResult"] = "Car was deleted.";
             return RedirectToAction("Index");
         }
 

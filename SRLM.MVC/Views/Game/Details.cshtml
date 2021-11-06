@@ -1,0 +1,58 @@
+﻿@model SRLM.Models.GameModels.GameDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>GameDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GameId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GameId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CarNames)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarNames) 
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrackNames)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrackNames)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlatformNames)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlatformNames) 
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.GameId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
