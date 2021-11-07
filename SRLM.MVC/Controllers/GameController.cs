@@ -17,7 +17,6 @@ namespace SRLM.Web.Controllers
         {
             var svc = CreateGameService();
             var model = svc.GetGames();
-
             return View(model);
         }
 
@@ -66,7 +65,6 @@ namespace SRLM.Web.Controllers
         {
             var svc = CreateGameService();
             var model = svc.GetGameById(id);
-
             return View(model);
         }
 
@@ -98,9 +96,7 @@ namespace SRLM.Web.Controllers
                 return View(model);
 
             if(model.GameId != id)
-            {
                 ModelState.AddModelError("", "Id Mismatch");
-            }
 
             var svc = CreateGameService();
 
@@ -109,9 +105,7 @@ namespace SRLM.Web.Controllers
                 TempData["SaveResult"] = "Game was updated.";
                 return RedirectToAction("Index");
             }
-
             ModelState.AddModelError("", "Game could not be updated.");
-            
             return View(model);
         }
 
@@ -121,7 +115,6 @@ namespace SRLM.Web.Controllers
         {
             var svc = CreateGameService();
             var model = svc.GetGameById(id);
-
             return View(model);
         }
 

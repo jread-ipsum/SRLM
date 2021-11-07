@@ -13,7 +13,6 @@ namespace SRLM.Services
     public class GameService
     {
         private readonly Guid _userId;
-
         public GameService(Guid userId)
         {
             _userId = userId;
@@ -25,12 +24,11 @@ namespace SRLM.Services
                 var query =
                     ctx
                     .Games
-                    .Select(
-                        e => new GameListItem
-                        {
-                            GameId = e.GameId,
-                            Title = e.Title
-                        });
+                    .Select(g => new GameListItem
+                    {
+                        GameId = g.GameId,
+                        Title = g.Title
+                    });
                 return query.ToArray();
             }
         }
@@ -50,35 +48,33 @@ namespace SRLM.Services
                 return ctx.SaveChanges() > 0;
             }
         }
-
         public GameDetail GetGameById(int id)
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
                     .Games
-                    .Single(e => e.GameId == id);
-
+                    .Single(g => g.GameId == id);
                 return
                     new GameDetail
                     {
                         GameId = entity.GameId,
                         Title = entity.Title,
-                        CarNames = entity.Cars.Select(e => e.Name),
-                        TrackNames = entity.Tracks.Select(e => e.Name),
-                        PlatformNames = entity.Platforms.Select(e => e.Name)
+                        CarNames = entity.Cars.Select(c => c.Name),
+                        TrackNames = entity.Tracks.Select(t => t.Name),
+                        PlatformNames = entity.Platforms.Select(p => p.Name)
                     };
             }
         }
         public bool UpdateGame(GameEdit model)
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
                     .Games
-                    .Single(e => e.GameId == model.GameId && e.OwnerId == _userId);
+                    .Single(g => g.GameId == model.GameId && g.OwnerId == _userId);
 
                 entity.Title = model.Title;
                 entity.Cars = CarList(model.CarIds);
@@ -90,66 +86,64 @@ namespace SRLM.Services
         }
         public bool DeleteGame(int id)
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
                     .Games
-                    .Single(e => e.GameId == id && e.OwnerId == _userId);
+                    .Single(g => g.GameId == id && g.OwnerId == _userId);
                 ctx.Games.Remove(entity);
-
                 return ctx.SaveChanges() == 1;
             }
         }
 
         public IEnumerable<SelectListItem> GetCarsSelectList()
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx
                     .Cars
-                    .Select(e => new SelectListItem
+                    .Select(c => new SelectListItem
                     {
-                        Text = e.Name,
-                        Value = e.CarId.ToString()
+                        Text = c.Name,
+                        Value = c.CarId.ToString()
                     });
                 return query.ToArray();
             }
         }
         public IEnumerable<SelectListItem> GetTracksSelectList()
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx
                     .Tracks
-                    .Select(e => new SelectListItem 
+                    .Select(t => new SelectListItem
                     {
-                        Text = e.Name,
-                        Value = e.TrackId.ToString()
+                        Text = t.Name,
+                        Value = t.TrackId.ToString()
                     });
                 return query.ToArray();
             }
         }
         public IEnumerable<SelectListItem> GetPlatformsSelectList()
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx
                     .Platforms
-                    .Select(e => new SelectListItem 
+                    .Select(p => new SelectListItem
                     {
-                        Text = e.Name,
-                        Value = e.PlatformId.ToString()
+                        Text = p.Name,
+                        Value = p.PlatformId.ToString()
                     });
                 return query.ToArray();
             }
         }
         private List<Car> CarList(List<int> carIds)
         {
-
             var cars = new List<Car>();
             using (var ctx = new ApplicationDbContext())
             {
@@ -167,7 +161,7 @@ namespace SRLM.Services
         private List<Track> TrackList(List<int> trackIds)
         {
             var tracks = new List<Track>();
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 foreach (var trackId in trackIds)
                 {
@@ -183,12 +177,12 @@ namespace SRLM.Services
         private List<Platform> PlatformList(List<int> platformIds)
         {
             var platforms = new List<Platform>();
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
-                foreach(var platformId in platformIds)
+                foreach (var platformId in platformIds)
                 {
                     var platform = ctx.Platforms.Find(platformId);
-                    if(platform!= null)
+                    if (platform != null)
                     {
                         platforms.Add(platform);
                     }

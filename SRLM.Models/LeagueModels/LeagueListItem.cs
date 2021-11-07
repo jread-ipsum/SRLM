@@ -11,6 +11,9 @@ namespace SRLM.Models.LeagueModels
         public int LeagueId { get; set; }
         public string Name { get; set; }
         public string Country { get; set; }
-        public int MyProperty { get; set; }
+        public DateTimeOffset StartDate { get; set; }
+        public string Game { get; set; }
+        public string RaceClass { get; set; }
+        public string Platform { get; set; }
     }
 }

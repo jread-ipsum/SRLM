@@ -266,10 +266,11 @@
     <Content Include="Views\Game\Details.cshtml" />
     <Content Include="Views\Game\Delete.cshtml" />
     <Content Include="Views\Game\Edit.cshtml" />
+    <Content Include="Views\League\Index.cshtml" />
+    <Content Include="Views\League\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\League\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

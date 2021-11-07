@@ -39,7 +39,7 @@ namespace SRLM.Data
         public int MaxDriverCount { get; set; }
 
         public DateTimeOffset CreatedUtc { get; set; }
-        public DateTimeOffset ModifiedUtc { get; set; }
+        public DateTimeOffset? ModifiedUtc { get; set; }
 
     }
 }
