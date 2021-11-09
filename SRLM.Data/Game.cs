@@ -12,7 +12,7 @@ namespace SRLM.Data
         [Key]
         public int GameId { get; set; }
         [Required]
-        public Guid OwnerId { get; set; }
+        public string OwnerId { get; set; }
         [Required]
         public string Title { get; set; }
         public virtual List<Car> Cars { get; set; }

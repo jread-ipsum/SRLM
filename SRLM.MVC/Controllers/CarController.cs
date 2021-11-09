@@ -12,12 +12,15 @@ namespace SRLM.Web.Controllers
     [Authorize]
     public class CarController : Controller
     {
+        private readonly ICarService _svc;
+        public CarController(ICarService svc)
+        {
+            _svc = svc;
+        }
         // GET: Car
         public ActionResult Index()
         {
-            var svc = CreateCarService();
-            var model = svc.GetCars();
-
+            var model = _svc.GetCars();
             return View(model);
         }
 
@@ -25,11 +28,8 @@ namespace SRLM.Web.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
-            var svc = CreateCarService();
             var model = new CarCreate();
-
-            model.RaceClasses = svc.RaceClassListItems();
-
+            model.RaceClasses = _svc.RaceClassListItems();
             return View(model);
         }
 
@@ -42,25 +42,23 @@ namespace SRLM.Web.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            var svc = CreateCarService();
+            model.UserId = User.Identity.GetUserId();
 
-            if(svc.CreateCar(model))
+            if(_svc.CreateCar(model))
             {
                 TempData["SaveResult"] = "Car was created.";
                 return RedirectToAction("Index");
             }
 
             ModelState.AddModelError("", "Car could not be created.");
-            model.RaceClasses = svc.RaceClassListItems();
+            model.RaceClasses = _svc.RaceClassListItems();
             return View(model);
         }
 
         //GET: Car/Details/{id}
         public ActionResult Details(int id)
         {
-            var svc = CreateCarService();
-            var model = svc.GetCarById(id);
-
+            var model = _svc.GetCarById(id);
             return View(model);
         }
 
@@ -68,8 +66,7 @@ namespace SRLM.Web.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
-            var svc = CreateCarService();
-            var detail = svc.GetCarById(id);
+            var detail = _svc.GetCarById(id);
 
             var model =
                 new CarEdit
@@ -77,9 +74,8 @@ namespace SRLM.Web.Controllers
                     CarId = detail.CarId,
                     Name = detail.Name,
                     RaceClassId = detail.RaceClassId,
-                    RaceClasses = svc.RaceClassListItems()
+                    RaceClasses = _svc.RaceClassListItems()
                 };
-
             return View(model);
         }
 
@@ -98,16 +94,16 @@ namespace SRLM.Web.Controllers
                 return View(model);
             }
 
-            var svc = CreateCarService();
+            model.UserId = User.Identity.GetUserId();
 
-            if(svc.UpdateCar(model))
+            if(_svc.UpdateCar(model))
             {
                 TempData["SaveResult"] = "Car was updated.";
                 return RedirectToAction("Index");
             }
 
             ModelState.AddModelError("", "Car could not be updated.");
-            model.RaceClasses = svc.RaceClassListItems();
+            model.RaceClasses = _svc.RaceClassListItems();
 
             return View(model);
         }
@@ -116,9 +112,7 @@ namespace SRLM.Web.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
-            var svc = CreateCarService();
-            var model = svc.GetCarById(id);
-
+            var model = _svc.GetCarById(id);
             return View(model);
         }
 
@@ -129,18 +123,10 @@ namespace SRLM.Web.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult DeleteCar(int id)
         {
-            var svc = CreateCarService();
-            svc.DeleteCar(id);
+            _svc.DeleteCar(id, User.Identity.GetUserId());
 
             TempData["SaveResult"] = "Car was deleted.";
             return RedirectToAction("Index");
-        }
-
-        private CarService CreateCarService()
-        {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var svc = new CarService(userId);
-            return svc;
         }
     }
 }

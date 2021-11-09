@@ -12,11 +12,15 @@ namespace SRLM.MVC.Controllers
     [Authorize]
     public class LeagueController : Controller
     {
+        private readonly ILeagueService _svc;
+        public LeagueController(ILeagueService svc)
+        {
+            _svc = svc;
+        }
         // GET: League
         public ActionResult Index()
         {
-            var svc = CreateLeagueService();
-            var model = svc.GetLeagues();
+            var model = _svc.GetLeagues();
             return View(model);
         }
         
@@ -24,12 +28,11 @@ namespace SRLM.MVC.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
-            var svc = CreateLeagueService();
             var model = new LeagueCreate();
 
-            model.Games = svc.GetGameSelectList();
-            model.RaceClasses = svc.GetRaceClassSelectList();
-            model.Platforms = svc.GetPlatformSelectList();
+            model.Games = _svc.GetGameSelectList();
+            model.RaceClasses = _svc.GetRaceClassSelectList();
+            model.Platforms = _svc.GetPlatformSelectList();
 
             return View(model);
         }
@@ -42,17 +45,19 @@ namespace SRLM.MVC.Controllers
         {
             if (!ModelState.IsValid)
                 return View(model);
-            var svc = CreateLeagueService();
-            if (svc.CreateLeague(model))
+
+            model.UserId = User.Identity.GetUserId();
+
+            if (_svc.CreateLeague(model))
             {
                 TempData["SaveResult"] = "League was created.";
                 return RedirectToAction("Index");
             }
             ModelState.AddModelError("", "League could not be created.");
 
-            model.Games = svc.GetGameSelectList();
-            model.RaceClasses = svc.GetRaceClassSelectList();
-            model.Platforms = svc.GetPlatformSelectList();
+            model.Games = _svc.GetGameSelectList();
+            model.RaceClasses = _svc.GetRaceClassSelectList();
+            model.Platforms = _svc.GetPlatformSelectList();
 
             return View(model);
         }
@@ -60,8 +65,7 @@ namespace SRLM.MVC.Controllers
         //GET: League/Details/{id}
         public ActionResult Details(int id)
         {
-            var svc = CreateLeagueService();
-            var model = svc.GetLeagueById(id);
+            var model = _svc.GetLeagueById(id);
             return View(model);
         }
 
@@ -69,8 +73,7 @@ namespace SRLM.MVC.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
-            var svc = CreateLeagueService();
-            var detail = svc.GetLeagueById(id);
+            var detail = _svc.GetLeagueById(id);
             var model = new LeagueEdit
             {
                 LeagueId = detail.LeagueId,
@@ -80,9 +83,9 @@ namespace SRLM.MVC.Controllers
                 StartDate = detail.StartDate,
                 EndDate = detail.EndDate,
                 MaxDriverCount = detail.MaxDriverCount,
-                Games = svc.GetGameSelectList(),
-                RaceClasses = svc.GetRaceClassSelectList(),
-                Platforms = svc.GetPlatformSelectList()
+                Games = _svc.GetGameSelectList(),
+                RaceClasses = _svc.GetRaceClassSelectList(),
+                Platforms = _svc.GetPlatformSelectList()
             };
             return View(model);
         }
@@ -98,8 +101,9 @@ namespace SRLM.MVC.Controllers
             if (model.LeagueId != id)
                 ModelState.AddModelError("", "Id Mismatch");
 
-            var svc = CreateLeagueService();
-            if (svc.UpdateLeague(model))
+            model.UserId = User.Identity.GetUserId();
+
+            if (_svc.UpdateLeague(model))
             {
                 TempData["SaveResult"] = "League was updated.";
                 return RedirectToAction("Index");
@@ -112,8 +116,7 @@ namespace SRLM.MVC.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
-            var svc = CreateLeagueService();
-            var model = svc.GetLeagueById(id);
+            var model = _svc.GetLeagueById(id);
             return View(model);
         }
         
@@ -124,18 +127,10 @@ namespace SRLM.MVC.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult DeleteLeague(int id)
         {
-            var svc = CreateLeagueService();
-            svc.DeleteLeague(id);
+            _svc.DeleteLeague(id, User.Identity.GetUserId());
 
             TempData["SaveResult"] = "League ws deleted.";
             return RedirectToAction("Index");
-        }
-        
-        private LeagueService CreateLeagueService()
-        {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var svc = new LeagueService(userId);
-            return svc;
         }
     }
 }

@@ -8,16 +8,11 @@ using System.Threading.Tasks;
 
 namespace SRLM.Services
 {
-    public class TrackService
+    public class TrackService : ITrackService
     {
-        private readonly Guid _userId;
-        public TrackService(Guid userId)
-        {
-            _userId = userId;
-        }
         public IEnumerable<TrackListItem> GetTracks()
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx
@@ -37,7 +32,7 @@ namespace SRLM.Services
             var entity =
                 new Track()
                 {
-                    OwnerId = _userId,
+                    OwnerId = model.UserId,
                     Name = model.Name,
                     Country = model.Country
                 };
@@ -49,7 +44,7 @@ namespace SRLM.Services
         }
         public TrackDetail GetTrackById(int id)
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
@@ -66,12 +61,12 @@ namespace SRLM.Services
         }
         public bool UpdateTrack(TrackEdit model)
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
                     .Tracks
-                    .Single(e => e.TrackId == model.TrackId && e.OwnerId == _userId);
+                    .Single(e => e.TrackId == model.TrackId && e.OwnerId == model.UserId);
 
                 entity.Name = model.Name;
                 entity.Country = model.Country;
@@ -79,14 +74,14 @@ namespace SRLM.Services
                 return ctx.SaveChanges() == 1;
             }
         }
-        public bool DeleteTrack(int trackId)
+        public bool DeleteTrack(int trackId, string userId)
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
                     .Tracks
-                    .Single(e => e.TrackId == trackId && e.OwnerId == _userId);
+                    .Single(e => e.TrackId == trackId && e.OwnerId == userId);
 
                 ctx.Tracks.Remove(entity);
 

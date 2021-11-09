@@ -15,6 +15,7 @@ namespace SRLM.Models.CarModels
         [MinLength(1, ErrorMessage ="Name must be at least 1 character")]
         [MaxLength(50, ErrorMessage = "Name must be less than 50 characters.")]
         public string Name { get; set; }
+        public string UserId { get; set; }
 
         [Required(ErrorMessage ="Must choose a race class")]
         [Display(Name="Race Class")]

@@ -12,7 +12,7 @@ namespace SRLM.Data
         [Key]
         public int TrackId { get; set; }
         [Required]
-        public Guid OwnerId { get; set; }
+        public string OwnerId { get; set; }
         [Required]
         public string Name { get; set; }
         public string Country { get; set; }

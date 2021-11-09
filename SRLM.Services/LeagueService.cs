@@ -9,13 +9,8 @@ using System.Web.Mvc;
 
 namespace SRLM.Services
 {
-    public class LeagueService
+    public class LeagueService : ILeagueService
     {
-        private readonly Guid _userId;
-        public LeagueService(Guid userId)
-        {
-            _userId = userId;
-        }
         public IEnumerable<LeagueListItem> GetLeagues()
         {
             using (var ctx = new ApplicationDbContext())
@@ -40,7 +35,7 @@ namespace SRLM.Services
         {
             var entity = new League()
             {
-                OwnerId = _userId,
+                OwnerId = model.UserId,
                 Name = model.Name,
                 Country = model.Country,
                 LobbySettings = model.LobbySettings,
@@ -92,7 +87,7 @@ namespace SRLM.Services
                 var entity =
                     ctx
                     .Leagues
-                    .Single(e => e.LeagueId == model.LeagueId && e.OwnerId == _userId);
+                    .Single(e => e.LeagueId == model.LeagueId && e.OwnerId == model.UserId);
 
                 entity.Name = model.Name;
                 entity.Country = model.Country;
@@ -108,14 +103,14 @@ namespace SRLM.Services
                 return ctx.SaveChanges() == 1;
             }
         }
-        public bool DeleteLeague(int id)
+        public bool DeleteLeague(int id, string userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
                     .Leagues
-                    .Single(e => e.LeagueId == id && e.OwnerId == _userId);
+                    .Single(e => e.LeagueId == id && e.OwnerId == userId);
                 ctx.Leagues.Remove(entity);
                 return ctx.SaveChanges() == 1;
             }

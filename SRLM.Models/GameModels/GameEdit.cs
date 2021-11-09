@@ -15,6 +15,7 @@ namespace SRLM.Models.GameModels
 
         [Required(ErrorMessage ="Game must have a title.")]
         public string Title { get; set; }
+        public string UserId { get; set; }
 
         [Required(ErrorMessage ="Game must have cars.")]
         public List<int> CarIds { get; set; }

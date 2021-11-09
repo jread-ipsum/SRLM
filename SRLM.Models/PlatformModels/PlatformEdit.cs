@@ -10,5 +10,6 @@ namespace SRLM.Models.PlatformModels
     {
         public int PlatformId { get; set; }
         public string Name { get; set; }
+        public string UserId { get; set; }
     }
 }

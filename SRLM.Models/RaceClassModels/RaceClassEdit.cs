@@ -10,5 +10,6 @@ namespace SRLM.Models.RaceClassModels
     {
         public int RaceClassId { get; set; }
         public string Name { get; set; }
+        public string UserId { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace SRLM.Models.TrackModels
         [MaxLength(50, ErrorMessage ="Must be less than 50 characters.")]
         [Display(Name = "Track Name")]
         public string Name { get; set; }
-        
         public string Country { get; set; }
+        public string UserId { get; set; }
     }
 }

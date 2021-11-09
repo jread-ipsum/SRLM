@@ -10,13 +10,8 @@ using System.Web.Mvc;
 
 namespace SRLM.Services
 {
-    public class GameService
+    public class GameService : IGameService
     {
-        private readonly Guid _userId;
-        public GameService(Guid userId)
-        {
-            _userId = userId;
-        }
         public IEnumerable<GameListItem> GetGames()
         {
             using (var ctx = new ApplicationDbContext())
@@ -36,7 +31,7 @@ namespace SRLM.Services
         {
             var entity = new Game()
             {
-                OwnerId = _userId,
+                OwnerId = model.UserId,
                 Title = model.Title,
                 Cars = CarList(model.CarIds),
                 Tracks = TrackList(model.TrackIds),
@@ -74,7 +69,7 @@ namespace SRLM.Services
                 var entity =
                     ctx
                     .Games
-                    .Single(g => g.GameId == model.GameId && g.OwnerId == _userId);
+                    .Single(g => g.GameId == model.GameId && g.OwnerId == model.UserId);
 
                 entity.Title = model.Title;
                 entity.Cars = CarList(model.CarIds);
@@ -84,14 +79,14 @@ namespace SRLM.Services
                 return ctx.SaveChanges() > 0;
             }
         }
-        public bool DeleteGame(int id)
+        public bool DeleteGame(int id, string userId)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
                     .Games
-                    .Single(g => g.GameId == id && g.OwnerId == _userId);
+                    .Single(g => g.GameId == id && g.OwnerId == userId);
                 ctx.Games.Remove(entity);
                 return ctx.SaveChanges() == 1;
             }

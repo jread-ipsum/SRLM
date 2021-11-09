@@ -28,6 +28,7 @@ namespace SRLM.Models.LeagueModels
         public int PlatformId { get; set; }
         [Required]
         public int MaxDriverCount { get; set; }
+        public string UserId { get; set; }
 
         public IEnumerable<SelectListItem> Games { get; set; }
         public IEnumerable<SelectListItem> RaceClasses { get; set; }

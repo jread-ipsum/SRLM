@@ -8,27 +8,21 @@ using System.Threading.Tasks;
 
 namespace SRLM.Services
 {
-    public class RaceClassService
+    public class RaceClassService : IRaceClassService
     {
-        private readonly Guid _userId;
-        public RaceClassService(Guid userId)
-        {
-            _userId = userId;
-        }
-
         public IEnumerable<RaceClassListItem> GetRaceClasses()
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx
                     .RaceClasses
                     .Select(
                         e => new RaceClassListItem
-                         {
-                             RaceClassId = e.RaceClassId,
-                             Name = e.Name
-                         });
+                        {
+                            RaceClassId = e.RaceClassId,
+                            Name = e.Name
+                        });
                 return query.ToArray();
             }
         }
@@ -38,7 +32,7 @@ namespace SRLM.Services
             var entity =
                 new RaceClass()
                 {
-                    OwnerId = _userId,
+                    OwnerId = model.UserId,
                     Name = model.Name
                 };
             using (var ctx = new ApplicationDbContext())
@@ -50,7 +44,7 @@ namespace SRLM.Services
 
         public RaceClassDetail GetRaceClassById(int id)
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
@@ -67,12 +61,12 @@ namespace SRLM.Services
 
         public bool UpdateRaceClass(RaceClassEdit model)
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
                     .RaceClasses
-                    .Single(e => e.RaceClassId == model.RaceClassId && e.OwnerId == _userId);
+                    .Single(e => e.RaceClassId == model.RaceClassId && e.OwnerId == model.UserId);
 
                 entity.Name = model.Name;
 
@@ -81,14 +75,14 @@ namespace SRLM.Services
         }
 
 
-        public bool DeleteRaceClass(int raceClassId)
+        public bool DeleteRaceClass(int raceClassId, string userId)
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
                     .RaceClasses
-                    .Single(e => e.RaceClassId == raceClassId && e.OwnerId == _userId);
+                    .Single(e => e.RaceClassId == raceClassId && e.OwnerId == userId);
 
                 ctx.RaceClasses.Remove(entity);
 

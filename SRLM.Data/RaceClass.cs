@@ -12,7 +12,7 @@ namespace SRLM.Data
         [Key]
         public int RaceClassId { get; set; }
         [Required]
-        public Guid OwnerId { get; set; }
+        public string OwnerId { get; set; }
         [Required]
         [Display(Name ="Class")]
         public string Name { get; set; }

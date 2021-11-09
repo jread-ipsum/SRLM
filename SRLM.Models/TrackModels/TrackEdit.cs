@@ -16,5 +16,6 @@ namespace SRLM.Models.TrackModels
         [Display(Name = "Track Name")]
         public string Name { get; set; }
         public string Country { get; set; }
+        public string UserId { get; set; }
     }
 }

@@ -12,11 +12,16 @@ namespace SRLM.Web.Controllers
     [Authorize]
     public class PlatformController : Controller
     {
+        private readonly IPlatformService _svc;
+        public PlatformController(IPlatformService svc)
+        {
+            _svc = svc;
+        }
+
         // GET: Platform
         public ActionResult Index()
         {
-            var svc = CreatePlatformService();
-            var model = svc.GetPlatforms();
+            var model = _svc.GetPlatforms();
 
             return View(model);
         }
@@ -37,9 +42,9 @@ namespace SRLM.Web.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            var svc = CreatePlatformService();
+            model.UserId = User.Identity.GetUserId();
 
-            if(svc.CreatePlatform(model))
+            if (_svc.CreatePlatform(model))
             {
                 TempData["SaveResult"] = "Platform was created.";
                 return RedirectToAction("Index");
@@ -52,8 +57,7 @@ namespace SRLM.Web.Controllers
         //GET: Platform/Details/{id}
         public ActionResult Details(int id)
         {
-            var svc = CreatePlatformService();
-            var model = svc.GetPlatformById(id);
+            var model = _svc.GetPlatformById(id);
 
             return View(model);
         }
@@ -62,8 +66,7 @@ namespace SRLM.Web.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
-            var svc = CreatePlatformService();
-            var detail = svc.GetPlatformById(id);
+            var detail = _svc.GetPlatformById(id);
 
             var model =
                 new PlatformEdit
@@ -89,9 +92,9 @@ namespace SRLM.Web.Controllers
                 return View(model);
             }
 
-            var svc = CreatePlatformService();
+            model.UserId = User.Identity.GetUserId();
 
-            if(svc.UpdatePlatform(model))
+            if (_svc.UpdatePlatform(model))
             {
                 TempData["SaveResult"] = "Platform was updated.";
                 return RedirectToAction("Index");
@@ -105,9 +108,7 @@ namespace SRLM.Web.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
-            var svc = CreatePlatformService();
-            var model = svc.GetPlatformById(id);
-
+            var model = _svc.GetPlatformById(id);
             return View(model);
         }
         
@@ -118,19 +119,10 @@ namespace SRLM.Web.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult DeletePlatform(int id)
         {
-            var svc = CreatePlatformService();
-
-            svc.DeletePlatform(id);
+            _svc.DeletePlatform(id, User.Identity.GetUserId());
 
             TempData["SaveResult"] = "Platform was deleted.";
-
             return RedirectToAction("Index");
-        }
-        private PlatformService CreatePlatformService()
-        {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var svc = new PlatformService(userId);
-            return svc;
         }
     }
 }

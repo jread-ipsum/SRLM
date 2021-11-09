@@ -12,12 +12,16 @@ namespace SRLM.Web.Controllers
     [Authorize]
     public class RaceClassController : Controller
     {
+        private readonly IRaceClassService _svc;
+        public RaceClassController(IRaceClassService svc)
+        {
+            _svc = svc;
+        }
+
         // GET: RaceClass
         public ActionResult Index()
         {
-            var svc = CreateRaceClassService();
-            var model = svc.GetRaceClasses();
-
+            var model = _svc.GetRaceClasses();
             return View(model);
         }
 
@@ -37,9 +41,9 @@ namespace SRLM.Web.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            var svc = CreateRaceClassService();
+            model.UserId = User.Identity.GetUserId();
 
-            if(svc.CreateRaceClass(model))
+            if (_svc.CreateRaceClass(model))
             {
                 TempData["SaveResult"] = "Race Class was created.";
                 return RedirectToAction("Index");
@@ -52,9 +56,7 @@ namespace SRLM.Web.Controllers
         //GET: RaceClass/Detail/{id}
         public ActionResult Details(int id)
         {
-            var svc = CreateRaceClassService();
-            var model = svc.GetRaceClassById(id);
-
+            var model = _svc.GetRaceClassById(id);
             return View(model);
         }
         
@@ -62,9 +64,7 @@ namespace SRLM.Web.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
-            var svc = CreateRaceClassService();
-            var detail = svc.GetRaceClassById(id);
-
+            var detail = _svc.GetRaceClassById(id);
             var model =
                 new RaceClassEdit
                 {
@@ -89,9 +89,9 @@ namespace SRLM.Web.Controllers
                 return View(model);
             }
 
-            var svc = CreateRaceClassService();
+            model.UserId = User.Identity.GetUserId();
 
-            if (svc.UpdateRaceClass(model))
+            if (_svc.UpdateRaceClass(model))
             {
                 TempData["SaveResult"] = "Race Class was updated.";
                 return RedirectToAction("Index");
@@ -105,9 +105,7 @@ namespace SRLM.Web.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
-            var svc = CreateRaceClassService();
-            var model = svc.GetRaceClassById(id);
-
+            var model = _svc.GetRaceClassById(id);
             return View(model);
         }
         
@@ -118,20 +116,11 @@ namespace SRLM.Web.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult DeleteRaceClass(int id)
         {
-            var svc = CreateRaceClassService();
-
-            svc.DeleteRaceClass(id);
+            _svc.DeleteRaceClass(id, User.Identity.GetUserId());
 
             TempData["SaveResult"] = "Race Class was deleted.";
 
             return RedirectToAction("Index");
-        }
-        
-        private RaceClassService CreateRaceClassService()
-        {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var svc = new RaceClassService(userId);
-            return svc;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace SRLM.Data
         [Key]
         public int CarId { get; set; }
         [Required]
-        public Guid OwnerId { get; set; }
+        public string OwnerId { get; set; }
         [Required]
         public string Name { get; set; }
 

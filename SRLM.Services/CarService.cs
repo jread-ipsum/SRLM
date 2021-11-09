@@ -10,14 +10,8 @@ using System.Web.Mvc;
 
 namespace SRLM.Services
 {
-    public class CarService
+    public class CarService : ICarService
     {
-        private readonly Guid _userId;
-        public CarService(Guid userId)
-        {
-            _userId = userId;
-        }
-
         public IEnumerable<SelectListItem> RaceClassListItems()
         {
             using (var ctx = new ApplicationDbContext())
@@ -36,7 +30,7 @@ namespace SRLM.Services
 
         public IEnumerable<CarListItem> GetCars()
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx
@@ -55,12 +49,12 @@ namespace SRLM.Services
             var entity =
                 new Car()
                 {
-                    OwnerId = _userId,
+                    OwnerId = model.UserId,
                     Name = model.Name,
                     RaceClassId = model.RaceClassId
                 };
 
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 ctx.Cars.Add(entity);
                 return ctx.SaveChanges() == 1;
@@ -68,7 +62,7 @@ namespace SRLM.Services
         }
         public CarDetail GetCarById(int id)
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
@@ -86,12 +80,12 @@ namespace SRLM.Services
         }
         public bool UpdateCar(CarEdit model)
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
                     .Cars
-                    .Single(e => e.CarId == model.CarId && e.OwnerId == _userId);
+                    .Single(e => e.CarId == model.CarId && e.OwnerId == model.UserId);
 
                 entity.Name = model.Name;
                 entity.RaceClassId = model.RaceClassId;
@@ -99,14 +93,14 @@ namespace SRLM.Services
                 return ctx.SaveChanges() == 1;
             }
         }
-        public bool DeleteCar(int id)
+        public bool DeleteCar(int id, string userId)
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
                     .Cars
-                    .Single(e => e.CarId == id && e.OwnerId == _userId);
+                    .Single(e => e.CarId == id && e.OwnerId == userId);
 
                 ctx.Cars.Remove(entity);
 

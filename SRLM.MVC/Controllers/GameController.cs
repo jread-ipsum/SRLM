@@ -12,24 +12,27 @@ namespace SRLM.Web.Controllers
     [Authorize]
     public class GameController : Controller
     {
+        private readonly IGameService _svc;
+        public GameController(IGameService svc)
+        {
+            _svc = svc;
+        }
         // GET: Game
         public ActionResult Index()
         {
-            var svc = CreateGameService();
-            var model = svc.GetGames();
+            var model = _svc.GetGames();
             return View(model);
         }
 
         //GET: Game/Create
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
-            var svc = CreateGameService();
             var model = new GameCreate();
 
-            model.Cars = svc.GetCarsSelectList();
-            model.Tracks = svc.GetTracksSelectList();
-            model.Platforms = svc.GetPlatformsSelectList();
+            model.Cars = _svc.GetCarsSelectList();
+            model.Tracks = _svc.GetTracksSelectList();
+            model.Platforms = _svc.GetPlatformsSelectList();
 
             return View(model);
         }
@@ -43,9 +46,9 @@ namespace SRLM.Web.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            var svc = CreateGameService();
+            model.UserId = User.Identity.GetUserId();
 
-            if(svc.CreateGame(model))
+            if (_svc.CreateGame(model))
             {
                 TempData["SaveResult"] = "Game was created.";
                 return RedirectToAction("Index");
@@ -53,9 +56,9 @@ namespace SRLM.Web.Controllers
 
             ModelState.AddModelError("", "Game could not be created");
 
-            model.Cars = svc.GetCarsSelectList();
-            model.Tracks = svc.GetTracksSelectList();
-            model.Platforms = svc.GetPlatformsSelectList();
+            model.Cars = _svc.GetCarsSelectList();
+            model.Tracks = _svc.GetTracksSelectList();
+            model.Platforms = _svc.GetPlatformsSelectList();
 
             return View(model);
         }
@@ -63,8 +66,7 @@ namespace SRLM.Web.Controllers
         //GET: Game/Details/{id}
         public ActionResult Details(int id)
         {
-            var svc = CreateGameService();
-            var model = svc.GetGameById(id);
+            var model = _svc.GetGameById(id);
             return View(model);
         }
 
@@ -72,17 +74,15 @@ namespace SRLM.Web.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
-            var svc = CreateGameService();
-            var detail = svc.GetGameById(id);
-            var model =
-                new GameEdit
-                {
-                    GameId = detail.GameId,
-                    Title = detail.Title,
-                    Cars = svc.GetCarsSelectList(),
-                    Tracks = svc.GetTracksSelectList(),
-                    Platforms = svc.GetPlatformsSelectList()
-                };
+            var detail = _svc.GetGameById(id);
+            var model = new GameEdit
+            {
+                GameId = detail.GameId,
+                Title = detail.Title,
+                Cars = _svc.GetCarsSelectList(),
+                Tracks = _svc.GetTracksSelectList(),
+                Platforms = _svc.GetPlatformsSelectList()
+            };
             return View(model);
         }
 
@@ -95,12 +95,12 @@ namespace SRLM.Web.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            if(model.GameId != id)
+            if (model.GameId != id)
                 ModelState.AddModelError("", "Id Mismatch");
 
-            var svc = CreateGameService();
+            model.UserId = User.Identity.GetUserId();
 
-            if (svc.UpdateGame(model))
+            if (_svc.UpdateGame(model))
             {
                 TempData["SaveResult"] = "Game was updated.";
                 return RedirectToAction("Index");
@@ -113,8 +113,7 @@ namespace SRLM.Web.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
-            var svc = CreateGameService();
-            var model = svc.GetGameById(id);
+            var model = _svc.GetGameById(id);
             return View(model);
         }
 
@@ -125,18 +124,10 @@ namespace SRLM.Web.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult DeleteGame(int id)
         {
-            var svc = CreateGameService();
-            svc.DeleteGame(id);
+            _svc.DeleteGame(id, User.Identity.GetUserId());
 
             TempData["SaveResult"] = "Game was deleted.";
             return RedirectToAction("Index");
-        }
-
-        private GameService CreateGameService()
-        {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var svc = new GameService(userId);
-            return svc;
         }
     }
 }

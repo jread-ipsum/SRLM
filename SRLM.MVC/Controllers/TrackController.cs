@@ -12,13 +12,16 @@ namespace SRLM.Web.Controllers
     [Authorize]
     public class TrackController : Controller
     {
+        private readonly ITrackService _svc;
+        public TrackController(ITrackService svc)
+        {
+            _svc = svc;
+        }
         
         // GET: Track
         public ActionResult Index()
         {
-            var svc = CreateTrackService();
-            var model = svc.GetTracks();
-
+            var model = _svc.GetTracks();
             return View(model);
         }
         
@@ -38,9 +41,8 @@ namespace SRLM.Web.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            var svc = CreateTrackService();
-
-            if (svc.CreateTrack(model))
+            model.UserId = User.Identity.GetUserId();
+            if (_svc.CreateTrack(model))
             {
                 TempData["SaveResult"] = "Track was created.";
                 return RedirectToAction("Index");
@@ -53,8 +55,7 @@ namespace SRLM.Web.Controllers
         //GET: Track/Detail/{id}
         public ActionResult Details(int id)
         {
-            var svc = CreateTrackService();
-            var model = svc.GetTrackById(id);
+            var model = _svc.GetTrackById(id);
 
             return View(model);
         }
@@ -63,8 +64,7 @@ namespace SRLM.Web.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
-            var svc = CreateTrackService();
-            var detail = svc.GetTrackById(id);
+            var detail = _svc.GetTrackById(id);
 
             var model =
                 new TrackEdit
@@ -92,9 +92,8 @@ namespace SRLM.Web.Controllers
                 return View(model);
             }
 
-            var svc = CreateTrackService();
-
-            if(svc.UpdateTrack(model))
+            model.UserId = User.Identity.GetUserId();
+            if (_svc.UpdateTrack(model))
             {
                 TempData["SaveResult"] = "Track was updated.";
                 return RedirectToAction("Index");
@@ -108,8 +107,7 @@ namespace SRLM.Web.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
-            var svc = CreateTrackService();
-            var model = svc.GetTrackById(id);
+            var model = _svc.GetTrackById(id);
 
             return View(model);
         }
@@ -121,20 +119,11 @@ namespace SRLM.Web.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult DeleteTrack(int id)
         {
-            var svc = CreateTrackService();
-
-            svc.DeleteTrack(id);
+            _svc.DeleteTrack(id, User.Identity.GetUserId());
 
             TempData["SaveResult"] = "Track was deleted.";
 
             return RedirectToAction("Index");
-        }
-        
-        private TrackService CreateTrackService()
-        {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var svc = new TrackService(userId);
-            return svc;
         }
     }
 }

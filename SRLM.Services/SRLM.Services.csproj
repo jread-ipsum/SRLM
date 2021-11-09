@@ -80,6 +80,12 @@
   <ItemGroup>
     <Compile Include="CarService.cs" />
     <Compile Include="GameService.cs" />
+    <Compile Include="ICarService.cs" />
+    <Compile Include="IGameService.cs" />
+    <Compile Include="ILeagueService.cs" />
+    <Compile Include="IPlatformService.cs" />
+    <Compile Include="IRaceClassService.cs" />
+    <Compile Include="ITrackService.cs" />
     <Compile Include="LeagueService.cs" />
     <Compile Include="PlatformService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -9,5 +9,6 @@ namespace SRLM.Models.PlatformModels
     public class PlatformCreate
     {
         public string Name { get; set; }
+        public string UserId { get; set; }
     }
 }

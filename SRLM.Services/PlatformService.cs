@@ -8,18 +8,11 @@ using System.Threading.Tasks;
 
 namespace SRLM.Services
 {
-    public class PlatformService
+    public class PlatformService : IPlatformService
     {
-        private readonly Guid _userId;
-
-        public PlatformService(Guid userId)
-        {
-            _userId = userId;
-        }
-
         public IEnumerable<PlatformListItem> GetPlatforms()
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx
@@ -30,7 +23,7 @@ namespace SRLM.Services
                             PlatformId = e.PlatformId,
                             Name = e.Name
                         });
-                    return query.ToArray();
+                return query.ToArray();
             }
         }
         public bool CreatePlatform(PlatformCreate model)
@@ -38,10 +31,10 @@ namespace SRLM.Services
             var entity =
                 new Platform()
                 {
-                    OwnerId = _userId,
+                    OwnerId = model.UserId,
                     Name = model.Name
                 };
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 ctx.Platforms.Add(entity);
                 return ctx.SaveChanges() == 1;
@@ -49,7 +42,7 @@ namespace SRLM.Services
         }
         public PlatformDetail GetPlatformById(int id)
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
@@ -65,26 +58,26 @@ namespace SRLM.Services
         }
         public bool UpdatePlatform(PlatformEdit model)
         {
-             using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
                     .Platforms
-                    .Single(e => e.PlatformId == model.PlatformId && e.OwnerId == _userId);
+                    .Single(e => e.PlatformId == model.PlatformId && e.OwnerId == model.UserId);
 
                 entity.Name = model.Name;
 
                 return ctx.SaveChanges() == 1;
             }
         }
-        public bool DeletePlatform(int id)
+        public bool DeletePlatform(int id, string userId)
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
                     .Platforms
-                    .Single(e => e.PlatformId == id && e.OwnerId == _userId);
+                    .Single(e => e.PlatformId == id && e.OwnerId == userId);
 
                 ctx.Platforms.Remove(entity);
 
