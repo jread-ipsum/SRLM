@@ -133,5 +133,48 @@ namespace SRLM.MVC.Controllers
             TempData["SaveResult"] = "League ws deleted.";
             return RedirectToAction("Index");
         }
+
+        //GET: League/AddDriver/{id}
+        public ActionResult AddDriver(int id)
+        {
+            var model = _svc.GetLeagueById(id);
+            return View(model);
+        }
+
+        //POST: League/AddDriver/{id}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("AddDriver")]
+        public ActionResult AddDriverToLeague(int id)
+        {
+            var result = _svc.AddDriverToLeague(id, User.Identity.GetUserId());
+            if(result is false)
+            {
+                TempData["FailedSaveResult"] = "Currently no available spots in this League.";
+                return RedirectToAction("Details", id);
+            }
+
+            TempData["SaveResult"] = "Successfully added to the League.";
+            return RedirectToAction("Details", id);
+        }
+
+        //GET: League/RemoveDriver/{id}
+        public ActionResult RemoveDriver(int id)
+        {
+            var model = _svc.GetLeagueById(id);
+            return View(model);
+        }
+
+        //POST: League/RemoveDriver/{id}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("RemoveDriver")]
+        public ActionResult RemoveDriverFromLeague(int id)
+        {
+            _svc.RemoveDriverFromLeague(id, User.Identity.GetUserId());
+
+            TempData["SaveResult"] = "Successfully removed from the League.";
+            return RedirectToAction("Details", id);
+        }
     }
 }

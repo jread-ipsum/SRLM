@@ -32,6 +32,7 @@ namespace SRLM.Services
                 return query.ToArray();
             }
         }
+
         public bool CreateLeague(LeagueCreate model)
         {
             var entity = new League()
@@ -54,6 +55,7 @@ namespace SRLM.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+
         public LeagueDetail GetLeagueById(int id)
         {
             using (var ctx = new ApplicationDbContext())
@@ -86,6 +88,7 @@ namespace SRLM.Services
                 };
             }
         }
+
         public bool UpdateLeague(LeagueEdit model)
         {
             using (var ctx = new ApplicationDbContext())
@@ -109,6 +112,7 @@ namespace SRLM.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+
         public bool DeleteLeague(int id, string userId)
         {
             using (var ctx = new ApplicationDbContext())
@@ -118,6 +122,47 @@ namespace SRLM.Services
                     .Leagues
                     .Single(e => e.LeagueId == id && e.OwnerId == userId);
                 ctx.Leagues.Remove(entity);
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
+        public bool AddDriverToLeague(int id, string userId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Leagues
+                    .Single(e => e.LeagueId == id);
+                var driver =
+                    ctx
+                    .Users
+                    .Find(userId);
+
+                if (entity.MaxDriverCount <= entity.Drivers.Count)
+                {
+                    return false;
+                }
+
+                entity.Drivers.Add(driver);
+                return ctx.SaveChanges() == 1;
+            }
+        }
+        
+        public bool RemoveDriverFromLeague(int id, string userId)
+        {
+            using(var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                    .Leagues
+                    .Single(e => e.LeagueId == id);
+                var driver =
+                    ctx
+                    .Users
+                    .Find(userId);
+
+                entity.Drivers.Remove(driver);
                 return ctx.SaveChanges() == 1;
             }
         }
@@ -137,6 +182,7 @@ namespace SRLM.Services
                 return query.ToArray();
             }
         }
+
         public IEnumerable<SelectListItem> GetRaceClassSelectList()
         {
             using (var ctx = new ApplicationDbContext())
@@ -152,6 +198,7 @@ namespace SRLM.Services
                 return query.ToArray();
             }
         }
+
         public IEnumerable<SelectListItem> GetPlatformSelectList()
         {
             using (var ctx = new ApplicationDbContext())
