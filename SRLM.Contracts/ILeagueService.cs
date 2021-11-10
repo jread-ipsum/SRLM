@@ -15,6 +15,6 @@ namespace SRLM.Contracts
         IEnumerable<SelectListItem> GetRaceClassSelectList();
         bool UpdateLeague(LeagueEdit model);
         bool AddDriverToLeague(int id, string userId);
-        bool RemoveDriverFromLeague(int id, string userId)
+        bool RemoveDriverFromLeague(int id, string userId);
     }
 }

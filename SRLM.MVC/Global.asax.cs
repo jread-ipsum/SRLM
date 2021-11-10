@@ -1,5 +1,6 @@
 using Autofac;
 using Autofac.Integration.Mvc;
+using SRLM.Contracts;
 using SRLM.Services;
 using System;
 using System.Collections.Generic;
