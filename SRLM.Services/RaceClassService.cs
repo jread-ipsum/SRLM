@@ -1,4 +1,5 @@
-﻿using SRLM.Data;
+﻿using SRLM.Contracts;
+using SRLM.Data;
 using SRLM.Models.RaceClassModels;
 using System;
 using System.Collections.Generic;

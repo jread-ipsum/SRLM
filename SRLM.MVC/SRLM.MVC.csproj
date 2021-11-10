@@ -314,6 +314,10 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SRLM.Contracts\SRLM.Contracts.csproj">
+      <Project>{fb7ae797-c619-493b-9fb7-874b8d042a3e}</Project>
+      <Name>SRLM.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SRLM.Data\SRLM.Data.csproj">
       <Project>{E6F3A6EA-6FDD-4892-A042-0F715B3B1C20}</Project>
       <Name>SRLM.Data</Name>

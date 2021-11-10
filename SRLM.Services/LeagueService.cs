@@ -1,4 +1,5 @@
-﻿using SRLM.Data;
+﻿using SRLM.Contracts;
+using SRLM.Data;
 using SRLM.Models.LeagueModels;
 using System;
 using System.Collections.Generic;
@@ -61,6 +62,12 @@ namespace SRLM.Services
                     ctx
                     .Leagues
                     .Single(e => e.LeagueId == id);
+
+                var drivers = 
+                    entity
+                    .Drivers
+                    .Select(e => e.GameTag).ToList();
+
                 return new LeagueDetail
                 {
                     LeagueId = entity.LeagueId,
@@ -72,9 +79,8 @@ namespace SRLM.Services
                     Game = entity.Game.Title,
                     RaceClass = entity.RaceClass.Name,
                     Platform = entity.Platform.Name,
-                    //Drivers = entity.Drivers
+                    Drivers = drivers,
                     MaxDriverCount = entity.MaxDriverCount,
-                    DriverCount = entity.Drivers.Count,
                     CreatedUtc = entity.CreatedUtc,
                     ModifiedUtc = entity.ModifiedUtc
                 };

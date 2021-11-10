@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SRLM.Models", "SRLM.Models\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SRLM.Services", "SRLM.Services\SRLM.Services.csproj", "{46D7079A-03AE-4CBD-8F8C-2824A03FE5A6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SRLM.Contracts", "SRLM.Contracts\SRLM.Contracts.csproj", "{FB7AE797-C619-493B-9FB7-874B8D042A3E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{46D7079A-03AE-4CBD-8F8C-2824A03FE5A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46D7079A-03AE-4CBD-8F8C-2824A03FE5A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46D7079A-03AE-4CBD-8F8C-2824A03FE5A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB7AE797-C619-493B-9FB7-874B8D042A3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB7AE797-C619-493B-9FB7-874B8D042A3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB7AE797-C619-493B-9FB7-874B8D042A3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB7AE797-C619-493B-9FB7-874B8D042A3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

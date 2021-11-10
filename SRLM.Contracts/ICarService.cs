@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 
-namespace SRLM.Services
+namespace SRLM.Contracts
 {
     public interface ICarService
     {

@@ -1,7 +1,7 @@
 ﻿using SRLM.Models.PlatformModels;
 using System.Collections.Generic;
 
-namespace SRLM.Services
+namespace SRLM.Contracts
 {
     public interface IPlatformService
     {

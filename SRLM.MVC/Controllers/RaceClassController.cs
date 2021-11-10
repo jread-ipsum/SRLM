@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using SRLM.Contracts;
 using SRLM.Models.RaceClassModels;
 using SRLM.Services;
 using System;
