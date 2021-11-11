@@ -70,6 +70,25 @@ namespace SRLM.MVC.Models
         public string Email { get; set; }
 
         [Required]
+        [MinLength(1, ErrorMessage ="must be at least 1 character long.")]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [MinLength(1, ErrorMessage = "must be at least 1 character long.")]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        public string GameTag { get; set; }
+
+        [Required]
+        [MinLength(1, ErrorMessage = "must be at least 1 character long.")]
+        [Display(Name = "Discord Name")]
+        public string DiscordName { get; set; }
+
+        public string Country { get; set; }
+
+        [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
