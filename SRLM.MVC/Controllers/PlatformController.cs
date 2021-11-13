@@ -48,7 +48,7 @@ namespace SRLM.Web.Controllers
             if (_svc.CreatePlatform(model))
             {
                 TempData["SaveResult"] = "Platform was created.";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Admin");
             }
 
             ModelState.AddModelError("", "Platform could not be created.");
@@ -98,7 +98,7 @@ namespace SRLM.Web.Controllers
             if (_svc.UpdatePlatform(model))
             {
                 TempData["SaveResult"] = "Platform was updated.";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Admin");
             }
 
             ModelState.AddModelError("", "Platform could not be updated.");
@@ -123,7 +123,7 @@ namespace SRLM.Web.Controllers
             _svc.DeletePlatform(id, User.Identity.GetUserId());
 
             TempData["SaveResult"] = "Platform was deleted.";
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Admin");
         }
     }
 }

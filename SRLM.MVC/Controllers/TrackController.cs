@@ -46,7 +46,7 @@ namespace SRLM.Web.Controllers
             if (_svc.CreateTrack(model))
             {
                 TempData["SaveResult"] = "Track was created.";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Admin");
             }
 
             ModelState.AddModelError("", "Track could not be created.");
@@ -97,7 +97,7 @@ namespace SRLM.Web.Controllers
             if (_svc.UpdateTrack(model))
             {
                 TempData["SaveResult"] = "Track was updated.";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Admin");
             }
 
             ModelState.AddModelError("", "Track could not be updated.");
@@ -124,7 +124,7 @@ namespace SRLM.Web.Controllers
 
             TempData["SaveResult"] = "Track was deleted.";
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Admin");
         }
     }
 }

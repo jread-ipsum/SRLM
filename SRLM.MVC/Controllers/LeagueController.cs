@@ -52,7 +52,7 @@ namespace SRLM.MVC.Controllers
             if (_svc.CreateLeague(model))
             {
                 TempData["SaveResult"] = "League was created.";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Admin");
             }
             ModelState.AddModelError("", "League could not be created.");
 
@@ -107,7 +107,7 @@ namespace SRLM.MVC.Controllers
             if (_svc.UpdateLeague(model))
             {
                 TempData["SaveResult"] = "League was updated.";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Admin");
             }
             ModelState.AddModelError("", "League could not be updated.");
             return View(model);
@@ -131,7 +131,7 @@ namespace SRLM.MVC.Controllers
             _svc.DeleteLeague(id, User.Identity.GetUserId());
 
             TempData["SaveResult"] = "League ws deleted.";
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Admin");
         }
 
         //GET: League/AddDriver/{id}

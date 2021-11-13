@@ -1,0 +1,36 @@
+﻿@model IEnumerable<SRLM.Models.PlatformModels.PlatformListItem>
+@Styles.Render("~/Content/css")
+
+<div class="row">
+    <div class="col-xs-6">
+        <div class="card text-white bg-primary mb-3">
+            <h5 class="card-header text-center">Platform Manager</h5>
+            <div class="card-body">
+            <table class="table table-bordered table-striped table-dark table-hover">
+                <thead>
+                    <tr>
+                        <th>Platform Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var platform in Model)
+                    {
+                        <tr>
+                            <td>@platform.Name</td>
+                            <td>
+                                @Html.ActionLink("Edit","Edit","Platform", new { id = platform.PlatformId}, new {@type="button", @class="btn btn-secondary" }) 
+                                @Html.ActionLink("Details", "Details","Platform", new { id = platform.PlatformId }, new { @type = "button", @class = "btn btn-secondary" }) 
+                                @Html.ActionLink("Delete", "Delete","Platform", new { id = platform.PlatformId }, new { @type = "button", @class = "btn btn-secondary" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+        </table>
+            </div>
+            <div class="card-footer text-center">
+                <a href="/platform/create" class="btn btn-primary btn-lg">Create a platform</a>
+            </div>
+        </div>
+    </div>
+</div>

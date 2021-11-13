@@ -4,11 +4,25 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    @foreach (var item in Model)
+    {
+        <div class="col">
+            <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
 <table class="table">
     <tr>
         <th>
@@ -35,35 +49,36 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.LeagueId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Country)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartDate.ToString("d"))
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Game)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RaceClass)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Platform)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id= item.LeagueId }) |
-            @Html.ActionLink("Details", "Details", new { id = item.LeagueId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.LeagueId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LeagueId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate.ToString("d"))
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Game)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RaceClass)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Platform)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.LeagueId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.LeagueId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.LeagueId })
+            </td>
+        </tr>
+    }
 
 </table>

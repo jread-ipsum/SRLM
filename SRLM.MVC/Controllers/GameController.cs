@@ -52,7 +52,7 @@ namespace SRLM.Web.Controllers
             if (_svc.CreateGame(model))
             {
                 TempData["SaveResult"] = "Game was created.";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Admin");
             }
 
             ModelState.AddModelError("", "Game could not be created");
@@ -104,7 +104,7 @@ namespace SRLM.Web.Controllers
             if (_svc.UpdateGame(model))
             {
                 TempData["SaveResult"] = "Game was updated.";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Admin");
             }
             ModelState.AddModelError("", "Game could not be updated.");
             return View(model);
@@ -128,7 +128,7 @@ namespace SRLM.Web.Controllers
             _svc.DeleteGame(id, User.Identity.GetUserId());
 
             TempData["SaveResult"] = "Game was deleted.";
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Admin");
         }
     }
 }

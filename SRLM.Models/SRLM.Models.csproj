@@ -78,6 +78,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminDashboardModels\AdminDashboard.cs" />
     <Compile Include="CarModels\CarCreate.cs" />
     <Compile Include="CarModels\CarDetail.cs" />
     <Compile Include="CarModels\CarEdit.cs" />

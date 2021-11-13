@@ -48,7 +48,7 @@ namespace SRLM.Web.Controllers
             if(_svc.CreateCar(model))
             {
                 TempData["SaveResult"] = "Car was created.";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Admin");
             }
 
             ModelState.AddModelError("", "Car could not be created.");
@@ -100,7 +100,7 @@ namespace SRLM.Web.Controllers
             if(_svc.UpdateCar(model))
             {
                 TempData["SaveResult"] = "Car was updated.";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Admin");
             }
 
             ModelState.AddModelError("", "Car could not be updated.");
@@ -127,7 +127,7 @@ namespace SRLM.Web.Controllers
             _svc.DeleteCar(id, User.Identity.GetUserId());
 
             TempData["SaveResult"] = "Car was deleted.";
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Admin");
         }
     }
 }

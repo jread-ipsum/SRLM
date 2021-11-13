@@ -47,7 +47,7 @@ namespace SRLM.Web.Controllers
             if (_svc.CreateRaceClass(model))
             {
                 TempData["SaveResult"] = "Race Class was created.";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Admin");
             }
 
             ModelState.AddModelError("", "Race Class could not be created.");
@@ -95,7 +95,7 @@ namespace SRLM.Web.Controllers
             if (_svc.UpdateRaceClass(model))
             {
                 TempData["SaveResult"] = "Race Class was updated.";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Admin");
             }
 
             ModelState.AddModelError("", "Race Class could not be updated.");
@@ -121,7 +121,7 @@ namespace SRLM.Web.Controllers
 
             TempData["SaveResult"] = "Race Class was deleted.";
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Admin");
         }
     }
 }

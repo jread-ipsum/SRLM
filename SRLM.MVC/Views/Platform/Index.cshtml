@@ -4,36 +4,38 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Platforms</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PlatformId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.PlatformId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PlatformId }) |
-            @Html.ActionLink("Details", "Details", new { id = item.PlatformId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.PlatformId })
-        </td>
-    </tr>
-}
-
-</table>
+<div class="row">
+    <div class="col-xs-6">
+        <div class="card text-white bg-primary mb-3">
+            <h5 class="card-header text-center">Platforms</h5>
+            <div class="card-body">
+                <table class="table table-bordered table-striped table-dark table-hover">
+                    <thead>
+                        <tr>
+                            <th>Platform Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var platform in Model)
+                        {
+                            <tr>
+                                <td>@platform.Name</td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", "Platform", new { id = platform.PlatformId }, new { @type = "button", @class = "btn btn-secondary" })
+                                    @Html.ActionLink("Details", "Details", "Platform", new { id = platform.PlatformId }, new { @type = "button", @class = "btn btn-secondary" })
+                                    @Html.ActionLink("Delete", "Delete", "Platform", new { id = platform.PlatformId }, new { @type = "button", @class = "btn btn-secondary" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer text-center">
+                <a href="/platform/create" class="btn btn-primary btn-lg">Create new platform</a>
+            </div>
+        </div>
+    </div>
+</div>
