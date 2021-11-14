@@ -1,4 +1,5 @@
-﻿using SRLM.Data;
+﻿using SRLM.Contracts;
+using SRLM.Data;
 using SRLM.Models.DriverModels;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SRLM.Services
 {
-    public class DriverService
+    public class DriverService : IDriverService
     {
         public IEnumerable<DriverListItem> GetDrivers()
         {
@@ -20,8 +21,8 @@ namespace SRLM.Services
                     .Select(e => new DriverListItem
                     {
                         FirstName = e.FirstName,
-                        LastName=e.LastName,
-                        GameTag= e.GameTag,
+                        LastName = e.LastName,
+                        GameTag = e.GameTag,
                         DiscordName = e.DiscordName,
                         Country = e.Country
                     });
@@ -30,7 +31,7 @@ namespace SRLM.Services
         }
         public DriverDetail GetDriverByDiscordName(string discordName)
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx

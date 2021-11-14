@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ICarService.cs" />
+    <Compile Include="IDriverService.cs" />
     <Compile Include="IGameService.cs" />
     <Compile Include="ILeagueService.cs" />
     <Compile Include="IPlatformService.cs" />
