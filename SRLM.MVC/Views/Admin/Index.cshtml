@@ -5,9 +5,13 @@
 
 <br />
 
+<div class="row">
+    @Html.Partial("_LeagueIndex", Model.LeagueListItems)
+</div>
+
 <div class="row row-cols-1 row-cols-md-2 g-4">
     <div class="col">
-      @Html.Partial("_PlatformIndex", Model.PlatformListItems)
+        @Html.Partial("_PlatformIndex", Model.PlatformListItems)
     </div>
     <div class="col">
         @Html.Partial("_TrackIndex", Model.TrackListItems)
@@ -19,10 +23,7 @@
         @Html.Partial("_CarIndex", Model.CarListItems)
     </div>
     <div class="col">
-        @Html.Partial("_LeagueIndex", Model.LeagueListItems)
-    </div>
-    <div class="col">
-       @Html.Partial("_RaceClassIndex", Model.RaceClassListItems)
+        @Html.Partial("_RaceClassIndex", Model.RaceClassListItems)
     </div>
 </div>
 

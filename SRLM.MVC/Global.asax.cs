@@ -43,6 +43,7 @@ namespace SRLM.MVC
             builder.RegisterType<CarService>().As<ICarService>();
             builder.RegisterType<GameService>().As<IGameService>();
             builder.RegisterType<LeagueService>().As<ILeagueService>();
+            builder.RegisterType<DriverService>().As<IDriverService>();
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();
 

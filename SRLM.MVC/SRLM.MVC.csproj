@@ -232,6 +232,9 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\img\glen-rushton-Uwl7TRuTZqE-unsplash.jpg" />
+    <Content Include="Content\img\site_banner.jpg" />
+    <Content Include="Content\img\zdr_logo.jpg" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -391,11 +394,11 @@
     <Content Include="Views\Shared\_CarIndex.cshtml" />
     <Content Include="Views\Shared\_GameIndex.cshtml" />
     <Content Include="Views\Shared\_LeagueIndex.cshtml" />
+    <Content Include="Views\Driver\Index.cshtml" />
+    <Content Include="Views\Driver\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\img\" />
-    <Folder Include="Views\Driver\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

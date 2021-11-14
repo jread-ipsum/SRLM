@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace SRLM.MVC.Controllers
 {
+    [Authorize]
     public class DriverController : Controller
     {
         private readonly IDriverService _svc;

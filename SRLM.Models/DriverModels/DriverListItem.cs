@@ -13,7 +13,7 @@ namespace SRLM.Models.DriverModels
         public string FirstName { get; set; }
         [Display(Name ="Last Name")]
         public string LastName { get; set; }
-        [Display(Name ="Game Tage")]
+        [Display(Name ="Game Tag")]
         public string GameTag { get; set; }
         [Display(Name ="Discord Name")]
         public string DiscordName { get; set; }
