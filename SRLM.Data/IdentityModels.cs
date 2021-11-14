@@ -25,7 +25,7 @@ namespace SRLM.Data
         [Display(Name ="Discord Name")]
         public string DiscordName { get; set; }
         public string Country { get; set; }
-        public virtual List<League> Leagues { get; set; }
+        public virtual ICollection<League> Leagues { get; set; }
         public DateTimeOffset CreatedUtc { get; set; }
         public DateTimeOffset? ModifiedUtc { get; set; }
 

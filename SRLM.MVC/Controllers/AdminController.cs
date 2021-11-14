@@ -16,13 +16,15 @@ namespace SRLM.MVC.Controllers
         private readonly ITrackService _trackSvc;
         private readonly ICarService _carSvc;
         private readonly IRaceClassService _raceClassSvc;
-        public AdminController(IPlatformService platformSvc, IGameService gameSvc, ITrackService trackSvc, ICarService carSvc, IRaceClassService raceClassSvc)
+        private readonly ILeagueService _leagueSvc;
+        public AdminController(IPlatformService platformSvc, IGameService gameSvc, ITrackService trackSvc, ICarService carSvc, IRaceClassService raceClassSvc, ILeagueService leagueSvc)
         {
             _platformSvc = platformSvc;
             _gameSvc = gameSvc;
             _trackSvc = trackSvc;
             _carSvc = carSvc;
             _raceClassSvc = raceClassSvc;
+            _leagueSvc = leagueSvc;
         }
         // GET: Admin
         public ActionResult Index()
@@ -33,6 +35,7 @@ namespace SRLM.MVC.Controllers
             model.TrackListItems = _trackSvc.GetTracks();
             model.CarListItems = _carSvc.GetCars();
             model.RaceClassListItems = _raceClassSvc.GetRaceClasses();
+            model.LeagueListItems = _leagueSvc.GetLeagues();
             return View(model);
         }
     }

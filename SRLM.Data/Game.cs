@@ -15,9 +15,9 @@ namespace SRLM.Data
         public string OwnerId { get; set; }
         [Required]
         public string Title { get; set; }
-        public virtual List<Car> Cars { get; set; }
-        public virtual List<Track> Tracks { get; set; }
+        public virtual ICollection<Car> Cars { get; set; }
+        public virtual ICollection<Track> Tracks { get; set; }
 
-        public virtual List<Platform> Platforms { get; set; }
+        public virtual ICollection<Platform> Platforms { get; set; }
     }
 }

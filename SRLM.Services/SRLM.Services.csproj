@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CarService.cs" />
+    <Compile Include="DriverService.cs" />
     <Compile Include="GameService.cs" />
     <Compile Include="LeagueService.cs" />
     <Compile Include="PlatformService.cs" />

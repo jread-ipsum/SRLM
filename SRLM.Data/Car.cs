@@ -22,6 +22,6 @@ namespace SRLM.Data
         public int RaceClassId { get; set; }
         public virtual RaceClass RaceClass { get; set; }
 
-        public virtual List<Game> Games { get; set; }
+        public virtual ICollection<Game> Games { get; set; }
     }
 }

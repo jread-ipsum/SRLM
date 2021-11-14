@@ -1,5 +1,6 @@
 ﻿using SRLM.Models.CarModels;
 using SRLM.Models.GameModels;
+using SRLM.Models.LeagueModels;
 using SRLM.Models.PlatformModels;
 using SRLM.Models.RaceClassModels;
 using SRLM.Models.TrackModels;
@@ -18,5 +19,6 @@ namespace SRLM.Models.AdminDashboardModels
         public IEnumerable<TrackListItem> TrackListItems { get; set; }
         public IEnumerable<CarListItem> CarListItems { get; set; }
         public IEnumerable<RaceClassListItem> RaceClassListItems { get; set; }
+        public IEnumerable<LeagueListItem> LeagueListItems { get; set; }
     }
 }

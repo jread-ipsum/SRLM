@@ -68,7 +68,7 @@ namespace SRLM.Services
                 var drivers = 
                     entity
                     .Drivers
-                    .Select(e => e.GameTag).ToList();
+                    .Select(e => e.DiscordName).ToList();
 
                 return new LeagueDetail
                 {

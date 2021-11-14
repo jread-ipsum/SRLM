@@ -4,36 +4,38 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="row">
+    <div class="col-xs-6">
+        <div class="card text-white bg-primary mb-3">
+            <h5 class="card-header text-center">Game Manager</h5>
+            <div class="card-body">
+                <table class="table table-bordered table-striped table-dark table-hover">
+                    <thead>
+                        <tr>
+                            <th>Game Title</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var game in Model)
+                        {
+                            <tr>
+                                <td>@game.Title</td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", "Game", new { id = game.GameId }, new { @type = "button", @class = "btn btn-secondary" })
+                                    @Html.ActionLink("Details", "Details", "Game", new { id = game.GameId }, new { @type = "button", @class = "btn btn-secondary" })
+                                    @Html.ActionLink("Delete", "Delete", "Game", new { id = game.GameId }, new { @type = "button", @class = "btn btn-secondary" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer text-center">
+                <a href="/game/create" class="btn btn-primary btn-lg">Create a game</a>
+            </div>
+        </div>
+    </div>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.GameId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.GameId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id= item.GameId }) |
-            @Html.ActionLink("Details", "Details", new { id = item.GameId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.GameId })
-        </td>
-    </tr>
-}
-
-</table>

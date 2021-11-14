@@ -15,6 +15,6 @@ namespace SRLM.Data
         public string OwnerId { get; set; }
         [Required]
         public string Name { get; set; }
-        public virtual List<Game> Games { get; set; }
+        public virtual ICollection<Game> Games { get; set; }
     }
 }

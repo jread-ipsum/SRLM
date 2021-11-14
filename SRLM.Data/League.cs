@@ -19,6 +19,7 @@ namespace SRLM.Data
         public string Country { get; set; }
         public string LobbySettings { get; set; }
         [Required]
+        [DisplayFormat(ApplyFormatInEditMode =true, DataFormatString ="{0:dd/MMM/yyyy}")]
         public DateTimeOffset StartDate { get; set; }
         [Required]
         public DateTimeOffset EndDate { get; set; }
@@ -35,7 +36,7 @@ namespace SRLM.Data
         public int PlatformId { get; set; }
         public virtual Platform Platform { get; set; }
 
-        public virtual List<ApplicationUser> Drivers { get; set; }
+        public virtual ICollection<ApplicationUser> Drivers { get; set; }
         public int MaxDriverCount { get; set; }
 
         public DateTimeOffset CreatedUtc { get; set; }

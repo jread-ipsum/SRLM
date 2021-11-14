@@ -1,0 +1,37 @@
+﻿@model IEnumerable<SRLM.Models.GameModels.GameListItem>
+@Styles.Render("~/Content/css")
+
+<div class="row">
+    <div class="col-xs-6">
+        <div class="card text-white bg-primary mb-3">
+            <h5 class="card-header text-center">Game Manager</h5>
+            <div class="card-body">
+                <table class="table table-bordered table-striped table-dark table-hover">
+                    <thead>
+                        <tr>
+                            <th>Game Title</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var game in Model)
+                        {
+                            <tr>
+                                <td>@game.Title</td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", "Game", new { id = game.GameId }, new { @type = "button", @class = "btn btn-secondary" })
+                                    @Html.ActionLink("Details", "Details", "Game", new { id = game.GameId }, new { @type = "button", @class = "btn btn-secondary" })
+                                    @Html.ActionLink("Delete", "Delete", "Game", new { id = game.GameId }, new { @type = "button", @class = "btn btn-secondary" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer text-center">
+                <a href="/game/create" class="btn btn-primary btn-lg">Create a game</a>
+            </div>
+        </div>
+    </div>
+</div>
+

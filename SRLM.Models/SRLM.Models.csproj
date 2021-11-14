@@ -83,6 +83,8 @@
     <Compile Include="CarModels\CarDetail.cs" />
     <Compile Include="CarModels\CarEdit.cs" />
     <Compile Include="CarModels\CarListItem.cs" />
+    <Compile Include="DriverModels\DriverDetail.cs" />
+    <Compile Include="DriverModels\DriverListItem.cs" />
     <Compile Include="GameModels\GameCreate.cs" />
     <Compile Include="GameModels\GameDetail.cs" />
     <Compile Include="GameModels\GameEdit.cs" />

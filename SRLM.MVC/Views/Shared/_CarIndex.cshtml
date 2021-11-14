@@ -1,0 +1,38 @@
+﻿@model IEnumerable<SRLM.Models.CarModels.CarListItem>
+@Styles.Render("~/Content/css")
+
+<div class="row">
+    <div class="col-xs-6">
+        <div class="card text-white bg-primary mb-3">
+            <h5 class="card-header text-center">Car Manager</h5>
+            <div class="card-body">
+                <table class="table table-bordered table-striped table-dark table-hover">
+                    <thead>
+                        <tr>
+                            <th>Car Name</th>
+                            <th>Race Class</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var car in Model)
+                        {
+                            <tr>
+                                <td>@car.Name</td>
+                                <td>@car.RaceClass</td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", "Car", new { id = car.CarId }, new { @type = "button", @class = "btn btn-secondary" })
+                                    @Html.ActionLink("Details", "Details", "Car", new { id = car.CarId }, new { @type = "button", @class = "btn btn-secondary" })
+                                    @Html.ActionLink("Delete", "Delete", "Car", new { id = car.CarId }, new { @type = "button", @class = "btn btn-secondary" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer text-center">
+                <a href="/car/create" class="btn btn-primary btn-lg">Create a car</a>
+            </div>
+        </div>
+    </div>
+</div>

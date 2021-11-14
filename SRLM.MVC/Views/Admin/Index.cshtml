@@ -13,31 +13,13 @@
         @Html.Partial("_TrackIndex", Model.TrackListItems)
     </div>
     <div class="col">
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Game Manager</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-            </div>
-        </div>
+        @Html.Partial("_GameIndex", Model.GameListItems)
     </div>
     <div class="col">
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Car Manager</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-        </div>
+        @Html.Partial("_CarIndex", Model.CarListItems)
     </div>
     <div class="col">
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">League Manager</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-        </div>
+        @Html.Partial("_LeagueIndex", Model.LeagueListItems)
     </div>
     <div class="col">
        @Html.Partial("_RaceClassIndex", Model.RaceClassListItems)

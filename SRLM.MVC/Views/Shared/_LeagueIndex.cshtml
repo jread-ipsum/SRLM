@@ -1,0 +1,46 @@
+﻿@model IEnumerable<SRLM.Models.LeagueModels.LeagueListItem>
+@Styles.Render("~/Content/css")
+
+<div class="row">
+    <div class="col-xs-6">
+        <div class="card text-white bg-primary mb-3">
+            <h5 class="card-header text-center">League Manager</h5>
+            <div class="card-body">
+                <table class="table table-bordered table-striped table-dark table-hover">
+                    <thead>
+                        <tr>
+                            <th>League Name</th>
+                            <th>Country</th>
+                            <th>Start Date</th>
+                            <th>Game</th>
+                            <th>Race Class</th>
+                            <th>Platform</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var league in Model)
+                        {
+                            <tr>
+                                <td>@league.Name</td>
+                                <td>@league.Country</td>
+                                <td>@league.StartDate</td>
+                                <td>@league.Game</td>
+                                <td>@league.RaceClass</td>
+                                <td>@league.Platform</td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", "League", new { id = league.LeagueId }, new { @type = "button", @class = "btn btn-secondary" })
+                                    @Html.ActionLink("Details", "Details", "League", new { id = league.LeagueId }, new { @type = "button", @class = "btn btn-secondary" })
+                                    @Html.ActionLink("Delete", "Delete", "League", new { id = league.LeagueId }, new { @type = "button", @class = "btn btn-secondary" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer text-center">
+                <a href="/League/create" class="btn btn-primary btn-lg">Create a League</a>
+            </div>
+        </div>
+    </div>
+</div>

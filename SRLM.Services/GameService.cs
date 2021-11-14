@@ -30,18 +30,43 @@ namespace SRLM.Services
         }
         public bool CreateGame(GameCreate model)
         {
-            var entity = new Game()
-            {
-                OwnerId = model.UserId,
-                Title = model.Title,
-                Cars = CarList(model.CarIds),
-                Tracks = TrackList(model.TrackIds),
-                Platforms = PlatformList(model.PlatformIds)
-            };
+            var entity = new Game();
+       
+            entity.OwnerId = model.UserId;
+            entity.Title = model.Title;
+            entity.Cars = new List<Car>();
+            entity.Tracks = new List<Track>();
+            entity.Platforms = new List<Platform>();
+
             using (var ctx = new ApplicationDbContext())
             {
+                foreach (int carId in model.CarIds)
+                {
+                    var car = ctx.Cars.Find(carId);
+                    if (car != null)
+                    {
+                        entity.Cars.Add(car);
+                    }
+                }
+                foreach (var trackId in model.TrackIds)
+                {
+                    var track = ctx.Tracks.Find(trackId);
+                    if (track != null)
+                    {
+                        entity.Tracks.Add(track);
+                    }
+                }
+                foreach (var platformId in model.PlatformIds)
+                {
+                    var platform = ctx.Platforms.Find(platformId);
+                    if (platform != null)
+                    {
+                        entity.Platforms.Add(platform);
+                    }
+                }
+
                 ctx.Games.Add(entity);
-                return ctx.SaveChanges() > 0;
+                return ctx.SaveChanges() == 1;
             }
         }
         public GameDetail GetGameById(int id)
@@ -73,11 +98,38 @@ namespace SRLM.Services
                     .Single(g => g.GameId == model.GameId && g.OwnerId == model.UserId);
 
                 entity.Title = model.Title;
-                entity.Cars = CarList(model.CarIds);
-                entity.Tracks = TrackList(model.TrackIds);
-                entity.Platforms = PlatformList(model.PlatformIds);
 
-                return ctx.SaveChanges() > 0;
+                entity.Cars = new List<Car>();
+                foreach (int carId in model.CarIds)
+                {
+                    var car = ctx.Cars.Find(carId);
+                    if (car != null)
+                    {
+                        entity.Cars.Add(car);
+                    }
+                }
+
+                entity.Tracks = new List<Track>();
+                foreach (var trackId in model.TrackIds)
+                {
+                    var track = ctx.Tracks.Find(trackId);
+                    if (track != null)
+                    {
+                        entity.Tracks.Add(track);
+                    }
+                }
+
+                entity.Platforms = new List<Platform>();
+                foreach (var platformId in model.PlatformIds)
+                {
+                    var platform = ctx.Platforms.Find(platformId);
+                    if (platform != null)
+                    {
+                        entity.Platforms.Add(platform);
+                    }
+                }
+
+                return ctx.SaveChanges() == 1;
             }
         }
         public bool DeleteGame(int id, string userId)
@@ -136,54 +188,6 @@ namespace SRLM.Services
                         Value = p.PlatformId.ToString()
                     });
                 return query.ToArray();
-            }
-        }
-        private List<Car> CarList(List<int> carIds)
-        {
-            var cars = new List<Car>();
-            using (var ctx = new ApplicationDbContext())
-            {
-                foreach (int carId in carIds)
-                {
-                    var car = ctx.Cars.Find(carId);
-                    if (car != null)
-                    {
-                        cars.Add(car);
-                    }
-                }
-                return cars;
-            }
-        }
-        private List<Track> TrackList(List<int> trackIds)
-        {
-            var tracks = new List<Track>();
-            using (var ctx = new ApplicationDbContext())
-            {
-                foreach (var trackId in trackIds)
-                {
-                    var track = ctx.Tracks.Find(trackId);
-                    if (track != null)
-                    {
-                        tracks.Add(track);
-                    }
-                }
-                return tracks;
-            }
-        }
-        private List<Platform> PlatformList(List<int> platformIds)
-        {
-            var platforms = new List<Platform>();
-            using (var ctx = new ApplicationDbContext())
-            {
-                foreach (var platformId in platformIds)
-                {
-                    var platform = ctx.Platforms.Find(platformId);
-                    if (platform != null)
-                    {
-                        platforms.Add(platform);
-                    }
-                }
-                return platforms;
             }
         }
     }

@@ -25,6 +25,15 @@ namespace SRLM.MVC
             bundles.Add(new Bundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            //Create bundel for jQueryUI  
+            //js  
+            bundles.Add(new Bundle("~/bundles/jqueryui").Include(
+                      "~/Scripts/jquery-ui-{version}.js"));
+            //css  
+            bundles.Add(new Bundle("~/Content/cssjqryUi").Include(
+                   "~/Content/jquery-ui.css"));
+
         }
     }
 }
