@@ -65,6 +65,10 @@
     <Compile Include="Migrations\202111132114452_initCreate.designer.cs">
       <DependentUpon>202111132114452_initCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202111142303584_GameImagePathAdded.cs" />
+    <Compile Include="Migrations\202111142303584_GameImagePathAdded.designer.cs">
+      <DependentUpon>202111142303584_GameImagePathAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,6 +82,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202111132114452_initCreate.resx">
       <DependentUpon>202111132114452_initCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111142303584_GameImagePathAdded.resx">
+      <DependentUpon>202111142303584_GameImagePathAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

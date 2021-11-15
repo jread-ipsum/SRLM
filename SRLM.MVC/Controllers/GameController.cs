@@ -4,6 +4,7 @@ using SRLM.Models.GameModels;
 using SRLM.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -42,17 +43,31 @@ namespace SRLM.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public ActionResult Create(GameCreate model)
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Create(GameCreate model, HttpPostedFileBase file)
         {
             if (!ModelState.IsValid)
                 return View(model);
 
             model.UserId = User.Identity.GetUserId();
 
-            if (_svc.CreateGame(model))
+            string rootedPath;
+            string path;
+            string fileName;
+
+            if (file != null)
             {
-                TempData["SaveResult"] = "Game was created.";
-                return RedirectToAction("Index", "Admin");
+                fileName = Path.GetFileName(file.FileName);
+                path = "Content/img/" + fileName;
+
+                rootedPath = Path.Combine(Server.MapPath("~/Content/img"), fileName);
+                file.SaveAs(rootedPath);
+
+                if (_svc.CreateGame(model, path))
+                {
+                    TempData["SaveResult"] = "Game was created.";
+                    return RedirectToAction("Index", "Admin");
+                }
             }
 
             ModelState.AddModelError("", "Game could not be created");

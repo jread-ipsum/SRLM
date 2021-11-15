@@ -26,8 +26,12 @@ namespace SRLM.Services
                         Country = e.Country,
                         StartDate = e.StartDate,
                         Game = e.Game.Title,
+                        GameImagePath= e.Game.ImagePath,
                         RaceClass = e.RaceClass.Name,
-                        Platform = e.Platform.Name
+                        Platform = e.Platform.Name,
+                        MaxDriverCount= e.MaxDriverCount,
+                        DriverCount = e.Drivers.Count
+                        
                     });
                 return query.ToArray();
             }
@@ -81,7 +85,7 @@ namespace SRLM.Services
                     Game = entity.Game.Title,
                     RaceClass = entity.RaceClass.Name,
                     Platform = entity.Platform.Name,
-                    Drivers = drivers,
+                    DriverNames = drivers,
                     MaxDriverCount = entity.MaxDriverCount,
                     CreatedUtc = entity.CreatedUtc,
                     ModifiedUtc = entity.ModifiedUtc

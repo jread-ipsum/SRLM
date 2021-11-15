@@ -13,7 +13,10 @@ namespace SRLM.Models.LeagueModels
         public string Country { get; set; }
         public DateTimeOffset StartDate { get; set; }
         public string Game { get; set; }
+        public string GameImagePath { get; set; }
         public string RaceClass { get; set; }
         public string Platform { get; set; }
+        public int MaxDriverCount { get; set; }
+        public int DriverCount { get; set; }
     }
 }

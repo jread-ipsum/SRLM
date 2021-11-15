@@ -7,7 +7,7 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "Game", FormMethod.Post, new {enctype ="multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -45,7 +45,15 @@
     </div>
 
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
+        <div class="col-md-offset-2 col-md-3">
+
+            <form action="Document/Create" method="post" enctype="multipart/form-data">
+                <br/>
+                <label class="camera-file-upload">
+                    <input type="file" name="file" id="file" />
+                </label>
+            </form>
+
             <input type="submit" value="Create" class="btn btn-default" />
         </div>
     </div>

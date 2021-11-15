@@ -28,7 +28,7 @@ namespace SRLM.Services
                 return query.ToArray();
             }
         }
-        public bool CreateGame(GameCreate model)
+        public bool CreateGame(GameCreate model, string path)
         {
             var entity = new Game();
        
@@ -37,6 +37,7 @@ namespace SRLM.Services
             entity.Cars = new List<Car>();
             entity.Tracks = new List<Track>();
             entity.Platforms = new List<Platform>();
+            entity.ImagePath = path;
 
             using (var ctx = new ApplicationDbContext())
             {
@@ -66,7 +67,7 @@ namespace SRLM.Services
                 }
 
                 ctx.Games.Add(entity);
-                return ctx.SaveChanges() == 1;
+                return ctx.SaveChanges() >0;
             }
         }
         public GameDetail GetGameById(int id)
