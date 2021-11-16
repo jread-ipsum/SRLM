@@ -176,7 +176,7 @@ namespace SRLM.MVC.Controllers
             _svc.RemoveDriverFromLeague(id, User.Identity.GetUserId());
 
             TempData["SaveResult"] = "Successfully removed from the League.";
-            return RedirectToAction("Details", id);
+            return RedirectToAction("Index");
         }
     }
 }

@@ -1,66 +1,95 @@
 ﻿@model SRLM.Models.DriverModels.DriverDetail
-
+@Styles.Render("~/Content/css")
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Driver Details";
 }
+<br />
 
-<h2>Details</h2>
+<h2> Driver Details</h2>
+<hr />
+<div class="card">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
 
-<div>
-    <h4>DriverDetail</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.GameTag)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.GameTag)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.GameTag)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.GameTag)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DiscordName)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DiscordName)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DiscordName)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.DiscordName)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Country)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Country)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Country)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Country)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedUtc)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedUtc)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreatedUtc)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.CreatedUtc)
-        </dd>
+        </dl>
+    </div>
+<br />
+<h1>Leagues entered</h1>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var league in Model.LeaguesEntered)
+    {
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body ">
+                    <h2 class="card-title text-white">@league.Name</h2>
+                    <h3 class="card-title text-white">@league.Platform</h3>
+                    <h4 class="card-text text-white">@league.Game</h4>
 
-    </dl>
+                    <p class="card-text">@league.Country</p>
+                    <p class="card-text">Race Class:  @league.RaceClass</p>
+                    <p class="card-text">Start Date: @league.StartDate</p>
+                    <p class="card-text"> Max Drives: @league.MaxDriverCount</p>
+                    <p class="card-text">Spots available: @(league.MaxDriverCount-league.DriverCount)</p>
+                    <div class="d-grid gap-2">
+                        @Html.ActionLink("Details", "Details", "League", new { id = league.LeagueId }, new { @type = "button", @class = "btn btn-large btn-secondary" })
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-grid gap-2">
+                            @Html.ActionLink("Remove from league", "RemoveDriver", "League", new { id = league.LeagueId }, new { @type = "submit", @class = "btn btn-success btn-lg btn-block" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

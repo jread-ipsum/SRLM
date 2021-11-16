@@ -81,13 +81,7 @@ namespace SRLM.Services
                         DiscordName = e.DiscordName,
                         Country = e.Country
                     });
-                        
-
-                var driverGameTags =
-                    entity
-                    .Drivers
-                    .Select(e => e.GameTag).ToList();
-
+                       
                 return new LeagueDetail
                 {
                     LeagueId = entity.LeagueId,
@@ -100,7 +94,6 @@ namespace SRLM.Services
                     RaceClass = entity.RaceClass.Name,
                     Platform = entity.Platform.Name,
                     Drivers = drivers.ToList(),
-                    DriverGamerTags=driverGameTags,
                     MaxDriverCount = entity.MaxDriverCount,
                     CreatedUtc = entity.CreatedUtc,
                     ModifiedUtc = entity.ModifiedUtc

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SRLM.Models.LeagueModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -21,6 +22,6 @@ namespace SRLM.Models.DriverModels
         [Display(Name ="Date Created")]
         public DateTimeOffset CreatedUtc { get; set; }
         [Display(Name ="Leagues Joined")]
-        public IEnumerable<string> LeagueNames { get; set; }
+        public List<LeagueListItem> LeaguesEntered { get; set; }
     }
 }

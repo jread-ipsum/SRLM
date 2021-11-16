@@ -21,9 +21,7 @@ namespace SRLM.Models.LeagueModels
         public string RaceClass { get; set; }
         public int PlatformId { get; set; }
         public string Platform { get; set; }
-        public List<int> DriverIds { get; set; }
         public List<DriverListItem> Drivers { get; set; }
-        public List<string> DriverGamerTags { get; set; }
         public int MaxDriverCount { get; set; }
         public DateTimeOffset CreatedUtc { get; set; }
         public DateTimeOffset? ModifiedUtc { get; set; }

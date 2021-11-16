@@ -1,0 +1,114 @@
+﻿@model SRLM.Models.LeagueModels.LeagueDetail
+@{
+    ViewBag.Title = "Withdraw from league";
+}
+
+<br />
+<div>
+    <h1>@Html.DisplayFor(model => model.Name)</h1>
+    <hr />
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Country)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Country)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Game)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Game)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.RaceClass)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.RaceClass)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Platform)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Platform)
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-sm">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.StartDate)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.StartDate)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.EndDate)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.EndDate)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MaxDriverCount)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.MaxDriverCount)
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-sm">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.LobbySettings)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.LobbySettings)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CreatedUtc)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CreatedUtc)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ModifiedUtc)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ModifiedUtc)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="card border-success mb-3">
+        <div class="card-body text-center">
+            <h2>Are you sure you would like to Withdraw from this League?</h2>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color ">
+                    <input type="submit" value="Remove from league" class="btn btn-success btn-lg btn-block" />
+                </div>
+            }
+        </div>
+    </div>
+</div>

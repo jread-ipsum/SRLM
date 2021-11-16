@@ -23,7 +23,7 @@ namespace SRLM.MVC.Controllers
             return View(model);
         }
 
-        //GET: Driver/Details/{DiscordName}
+        //GET: Driver/Details/{discordName}
         public ActionResult Details(string discordName)
         {
             var model = _svc.GetDriverByDiscordName(discordName);

@@ -2,6 +2,8 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using SRLM.Models.DriverModels;
+using SRLM.Models.LeagueModels;
 
 namespace SRLM.MVC.Models
 {
