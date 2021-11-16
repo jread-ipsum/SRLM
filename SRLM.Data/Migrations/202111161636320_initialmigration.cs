@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class initCreate : DbMigration
+    public partial class initialmigration : DbMigration
     {
         public override void Up()
         {
@@ -27,6 +27,7 @@
                         GameId = c.Int(nullable: false, identity: true),
                         OwnerId = c.String(nullable: false),
                         Title = c.String(nullable: false),
+                        ImagePath = c.String(),
                     })
                 .PrimaryKey(t => t.GameId);
             

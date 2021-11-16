@@ -61,13 +61,9 @@
     <Compile Include="Game.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="League.cs" />
-    <Compile Include="Migrations\202111132114452_initCreate.cs" />
-    <Compile Include="Migrations\202111132114452_initCreate.designer.cs">
-      <DependentUpon>202111132114452_initCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202111142303584_GameImagePathAdded.cs" />
-    <Compile Include="Migrations\202111142303584_GameImagePathAdded.designer.cs">
-      <DependentUpon>202111142303584_GameImagePathAdded.cs</DependentUpon>
+    <Compile Include="Migrations\202111161636320_initialmigration.cs" />
+    <Compile Include="Migrations\202111161636320_initialmigration.designer.cs">
+      <DependentUpon>202111161636320_initialmigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Platform.cs" />
@@ -80,11 +76,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202111132114452_initCreate.resx">
-      <DependentUpon>202111132114452_initCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202111142303584_GameImagePathAdded.resx">
-      <DependentUpon>202111142303584_GameImagePathAdded.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202111161636320_initialmigration.resx">
+      <DependentUpon>202111161636320_initialmigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

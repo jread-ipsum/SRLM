@@ -7,13 +7,13 @@ namespace SRLM.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class GameImagePathAdded : IMigrationMetadata
+    public sealed partial class initialmigration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(GameImagePathAdded));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(initialmigration));
         
         string IMigrationMetadata.Id
         {
-            get { return "202111142303584_GameImagePathAdded"; }
+            get { return "202111161636320_initialmigration"; }
         }
         
         string IMigrationMetadata.Source
