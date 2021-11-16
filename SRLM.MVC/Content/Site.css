@@ -1,6 +1,13 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-image: url(img/milan-csizmadia-9QePlhtS0wQ-unsplash.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size:cover;
+    margin: 0;
+
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -46,4 +53,9 @@ textarea {
 
 .card-link {
     position: relative;
+}
+
+.jumbotron {
+    margin-top: 50px;
+    font-weight:500;
 }

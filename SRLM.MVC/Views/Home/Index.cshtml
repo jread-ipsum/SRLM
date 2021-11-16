@@ -2,14 +2,20 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="card bg-dark text-white">
-    <img src="~/Content/img/site_banner.jpg" class="card-img" alt="Wave Checkered Flag">
-    <div class="card-img-overlay">
-        <h1 class="card-title">Welcome to Zero Delta Racing</h1>
-        <h2 class="card-text">Get on the Grid</h2>
-    </div>
-</div>
+<br />
 
-<div class="row">
-
+<div class="jumbotron">
+    <h1>Welcome to Zero Delta Racing</h1>
+    <h3>Premier spot for competitive online sim-racing based in North America</h3>
+    <hr class="my-4">
+    <h4>Find a league that fits your lifestyle now</h4>
+    <a class="btn btn-primary btn-lg" href="@Url.Action("Register","Account")" role="button">Register Now</a>
+    <hr class="my-4" />
+    <h4>Already have an account? Log in now</h4>
+    <a class="btn btn-primary btn-lg" href="@Url.Action("Login","Account")" role="button">Login in</a>
 </div>
+<br />
+<br />
+<br />
+
+
