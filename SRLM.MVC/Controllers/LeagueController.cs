@@ -130,7 +130,7 @@ namespace SRLM.MVC.Controllers
         {
             _svc.DeleteLeague(id, User.Identity.GetUserId());
 
-            TempData["SaveResult"] = "League ws deleted.";
+            TempData["SaveResult"] = "League was deleted.";
             return RedirectToAction("Index", "Admin");
         }
 
