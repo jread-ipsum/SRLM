@@ -1,10 +1,11 @@
 ﻿@model IEnumerable<SRLM.Models.LeagueModels.LeagueListItem>
-
+@Styles.Render("~/Content/css")
 @{
     ViewBag.Title = "Leagues";
 }
 <br />
-
+    
+@TempData["SaveResult"]
 
 <div class="row row-cols-1 row-cols-md-3 g-4">
     @foreach (var league in Model)
@@ -16,16 +17,17 @@
                     <h1 class="card-title text-white">@league.Platform</h1>
                     <h2 class="card-text text-white">@league.Game</h2>
                 </div>
-                <div class="card-body">
+
+                <div class="card-link card-body ">
                     <h5 class="card-title">@league.Name</h5>
                     <p class="card-text">@league.Country</p>
                     <p class="card-text">Race Class:  @league.RaceClass</p>
                     <p class="card-text">Start Date: @league.StartDate</p>
+                    <p class="card-text"> Max Drives: @league.MaxDriverCount</p>
                     <p class="card-text">Spots available: @(league.MaxDriverCount-league.DriverCount)</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="card-link">Details</a>
-                    @Html.ActionLink("Details", "Details","League", new { id = league.LeagueId }, null)
+                    <div class="d-grid gap-2">
+                        @Html.ActionLink("Details", "Details", "League", new { id = league.LeagueId }, new { @type = "button", @class = "btn btn-large btn-secondary" })
+                    </div>
                 </div>
             </div>
         </div>

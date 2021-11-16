@@ -2,6 +2,86 @@
 @{
     ViewBag.Title = "Register";
 }
+<br />
+<div class="card text-white bg-secondary mb-3">
+    <div class="card-header">
+        <h1 class="card-title text-center">Create a New Account</h1>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Email</label>
+                    <div>
+                        @Html.TextBoxFor(m => m.Email, new { @type = "email", @class = "form-control", @id = "inputEmail4", @placeholder = "Email@email.com" })
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(m => m.Country, new { @class = "control-label" })
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(m => m.Country, new { @class = "form-control", @placeholder = "Country" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(m => m.FirstName, new { @class = "control-label" })
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First name" })
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(m => m.LastName, new { @class = "control-label" })
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last name" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(m => m.GameTag, new { @class = "control-label" })
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(m => m.GameTag, new { @class = "form-control", @placeholder = "Gamer tag" })
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(m => m.DiscordName, new { @class = "control-label" })
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(m => m.DiscordName, new { @class = "form-control", @placeholder = "Discord user name" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+                    <div class="col-md-12">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "control-label" })
+                    <div class="col-md-12">
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="form-group">
+                    <div>
+                        <input type="submit" class="btn btn-block btn-success" value="Register" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
 
 <h2 class="text-center">Create a new account</h2>
 
@@ -17,7 +97,7 @@
                 <div class="form-group">
                     @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control"})
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="form-group">

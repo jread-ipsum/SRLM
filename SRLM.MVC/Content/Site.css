@@ -43,3 +43,7 @@ textarea {
     top: 15px;
     left: 10px;
 }
+
+.card-link {
+    position: relative;
+}

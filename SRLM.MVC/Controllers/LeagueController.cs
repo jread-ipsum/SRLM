@@ -150,12 +150,14 @@ namespace SRLM.MVC.Controllers
             var result = _svc.AddDriverToLeague(id, User.Identity.GetUserId());
             if(result is false)
             {
-                TempData["FailedSaveResult"] = "Currently no available spots in this League.";
-                return RedirectToAction("Details", id);
+                TempData["FailedSaveResult"] = "You have either already joined this league or there are currently no available spots.";
+                return View();
+                //return RedirectToAction("Details", id);
             }
 
             TempData["SaveResult"] = "Successfully added to the League.";
-            return RedirectToAction("Details", id);
+            //return View();
+            return RedirectToAction("Index");
         }
 
         //GET: League/RemoveDriver/{id}

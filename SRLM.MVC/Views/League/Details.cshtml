@@ -3,106 +3,155 @@
 @{
     ViewBag.Title = "Details";
 }
-
-<h2>Details</h2>
-
+<br />
 <div>
-    <h4>LeagueDetail</h4>
+    <h1>@Html.DisplayFor(model => model.Name)</h1>
     <hr />
-    <dl class="dl-horizontal">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Country)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Country)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Game)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Country)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Game)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Country)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.RaceClass)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LobbySettings)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.RaceClass)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.LobbySettings)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Platform)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Platform)
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-sm">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.StartDate)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.StartDate)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.EndDate)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.EndDate)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.EndDate)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MaxDriverCount)
+                    </dt>
 
+                    <dd>
+                        @Html.DisplayFor(model => model.MaxDriverCount)
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-sm">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.LobbySettings)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Game)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.LobbySettings)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CreatedUtc)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Game)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.CreatedUtc)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.RaceClass)
-        </dt>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ModifiedUtc)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.RaceClass)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Platform)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Platform)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MaxDriverCount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MaxDriverCount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedUtc)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedUtc)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedUtc)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedUtc)
-        </dd>
-
-    </dl>
+                    <dd>
+                        @Html.DisplayFor(model => model.ModifiedUtc)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div class="row">
+    <div class="col-xs-4">
+        <div class="card text-white bg-primary mb-3">
+            <h5 class="card-header text-center">League Drivers</h5>
+            <div class="card-body">
+                <table class="table table-bordered table-striped table-dark table-hover">
+                    <thead>
+                        <tr>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>Game tag</th>
+                            <th>Discord name</th>
+                            <th>Country</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var driver in Model.Drivers)
+                        {
+                            <tr>
+                                <td>@driver.FirstName</td>
+                                <td>@driver.LastName</td>
+                                <td>@driver.GameTag</td>
+                                <td>@driver.DiscordName</td>
+                                <td>@driver.Country</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card border-success mb-3">
+    <div class="card-body text-center">
+        <h2> Would you Like to Join this League?</h2>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                @*<input type="submit" value="Join" class="btn btn-success btn-lg btn-block" />*@
+                @Html.ActionLink("Join", "AddDriver", new { id = Model.LeagueId }, new { @type = "submit", @class = "btn btn-success btn-lg btn-block" })
+            </div>
+        }
+    </div>
+</div>
+
+@*<div>
+        @Html.Action("AddDriver")
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ })
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@

@@ -1,5 +1,6 @@
 ﻿using SRLM.Contracts;
 using SRLM.Data;
+using SRLM.Models.DriverModels;
 using SRLM.Models.LeagueModels;
 using System;
 using System.Collections.Generic;
@@ -69,10 +70,23 @@ namespace SRLM.Services
                     .Leagues
                     .Single(e => e.LeagueId == id);
 
-                var drivers = 
+                var drivers =
                     entity
                     .Drivers
-                    .Select(e => e.DiscordName).ToList();
+                    .Select(e => new DriverListItem
+                    {
+                        FirstName = e.FirstName,
+                        LastName = e.LastName,
+                        GameTag = e.GameTag,
+                        DiscordName = e.DiscordName,
+                        Country = e.Country
+                    });
+                        
+
+                var driverGameTags =
+                    entity
+                    .Drivers
+                    .Select(e => e.GameTag).ToList();
 
                 return new LeagueDetail
                 {
@@ -85,7 +99,8 @@ namespace SRLM.Services
                     Game = entity.Game.Title,
                     RaceClass = entity.RaceClass.Name,
                     Platform = entity.Platform.Name,
-                    DriverNames = drivers,
+                    Drivers = drivers.ToList(),
+                    DriverGamerTags=driverGameTags,
                     MaxDriverCount = entity.MaxDriverCount,
                     CreatedUtc = entity.CreatedUtc,
                     ModifiedUtc = entity.ModifiedUtc
@@ -143,13 +158,21 @@ namespace SRLM.Services
                     .Users
                     .Find(userId);
 
+                foreach(var user in entity.Drivers)
+                {
+                    if(user.Email == driver.Email)
+                    {
+                        return false;
+                    }
+                }
+
                 if (entity.MaxDriverCount <= entity.Drivers.Count)
                 {
                     return false;
                 }
 
                 entity.Drivers.Add(driver);
-                return ctx.SaveChanges() == 1;
+                return ctx.SaveChanges() >0;
             }
         }
         

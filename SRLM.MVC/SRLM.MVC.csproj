@@ -396,6 +396,7 @@
     <Content Include="Views\Shared\_LeagueIndex.cshtml" />
     <Content Include="Views\Driver\Index.cshtml" />
     <Content Include="Views\Driver\Details.cshtml" />
+    <Content Include="Views\Shared\_DriverIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
