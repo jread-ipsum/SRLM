@@ -151,8 +151,8 @@ namespace SRLM.MVC.Controllers
             if(result is false)
             {
                 TempData["FailedSaveResult"] = "You have either already joined this league or there are currently no available spots.";
-                return View();
-                //return RedirectToAction("Details", id);
+                
+                return RedirectToAction("Index");
             }
 
             TempData["SaveResult"] = "Successfully added to the League.";
@@ -173,7 +173,13 @@ namespace SRLM.MVC.Controllers
         [ActionName("RemoveDriver")]
         public ActionResult RemoveDriverFromLeague(int id)
         {
-            _svc.RemoveDriverFromLeague(id, User.Identity.GetUserId());
+
+            
+            if (_svc.RemoveDriverFromLeague(id, User.Identity.GetUserId())== false)
+            {
+                TempData["FailedSaveResult"] = "You cannot remove another driver from the League.";
+                return RedirectToAction("Index");
+            }
 
             TempData["SaveResult"] = "Successfully removed from the League.";
             return RedirectToAction("Index");

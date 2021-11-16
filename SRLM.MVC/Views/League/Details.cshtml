@@ -135,23 +135,14 @@
 
 <div class="card border-success mb-3">
     <div class="card-body text-center">
-        <h2> Would you Like to Join this League?</h2>
+        <h2> Would you like to join this League?</h2>
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
 
             <div class="form-actions no-color">
-                @*<input type="submit" value="Join" class="btn btn-success btn-lg btn-block" />*@
                 @Html.ActionLink("Join", "AddDriver", new { id = Model.LeagueId }, new { @type = "submit", @class = "btn btn-success btn-lg btn-block" })
             </div>
         }
     </div>
 </div>
-
-@*<div>
-        @Html.Action("AddDriver")
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ })
-        @Html.ActionLink("Back to List", "Index")
-    </p>*@

@@ -181,9 +181,15 @@ namespace SRLM.Services
                     ctx
                     .Users
                     .Find(userId);
-
-                entity.Drivers.Remove(driver);
-                return ctx.SaveChanges() == 1;
+                foreach(var user in entity.Drivers)
+                {
+                    if(user.Email == driver.Email)
+                    {
+                        entity.Drivers.Remove(driver);
+                        return ctx.SaveChanges() == 1;
+                    }
+                }
+                return false;
             }
         }
 

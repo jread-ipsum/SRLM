@@ -4,8 +4,11 @@
     ViewBag.Title = "Leagues";
 }
 <br />
-<div class="text-info">
-    @TempData["SaveResult"]
+<div class="text-success">
+    <h2>@TempData["SaveResult"]</h2>
+</div>
+<div class="text-danger">
+    <h2>@TempData["FailedSaveResult"]</h2>
 </div>
 
 <div class="row row-cols-1 row-cols-md-3 g-4">

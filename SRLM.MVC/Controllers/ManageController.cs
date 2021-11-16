@@ -6,8 +6,10 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using SRLM.Contracts;
 using SRLM.Data;
 using SRLM.MVC.Models;
+using SRLM.Services;
 
 namespace SRLM.MVC.Controllers
 {
@@ -63,8 +65,9 @@ namespace SRLM.MVC.Controllers
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
-
+            
             var userId = User.Identity.GetUserId();
+            var user = await UserManager.FindByIdAsync(userId);
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
@@ -72,6 +75,7 @@ namespace SRLM.MVC.Controllers
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                DiscordName = user.DiscordName
             };
             return View(model);
         }
